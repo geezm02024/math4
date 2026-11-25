@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Matematyka, klasa 4: 3 dni przed klasówką</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Lexend:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FBFCF7; --grid:#D9EBD7; --card:#FFFFFF; --text:#1C2333; --muted:#55607A;
+  --ink:#1D3A8F; --line:#B9C3DA; --soft:#EEF2FA;
+  --pink:rgba(255,79,176,.40); --orange:rgba(255,122,61,.42); --cyan:rgba(44,197,218,.42);
+  --good:#0B7A54; --bad:#C8321A; --pen:#D62828;
+  --hand:'Caveat','Comic Sans MS',cursive;
+  --body:'Lexend',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#111A2C; --grid:#1B2840; --card:#172238; --text:#E8EDF7; --muted:#A3AFC8;
+    --ink:#A9BEFF; --line:#34446A; --soft:#1D2A44;
+    --pink:rgba(255,79,176,.36); --orange:rgba(255,122,61,.36); --cyan:rgba(44,197,218,.33);
+    --good:#4FD9A3; --bad:#FF7A61; --pen:#FF6B6B;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#111A2C; --grid:#1B2840; --card:#172238; --text:#E8EDF7; --muted:#A3AFC8;
+  --ink:#A9BEFF; --line:#34446A; --soft:#1D2A44;
+  --pink:rgba(255,79,176,.36); --orange:rgba(255,122,61,.36); --cyan:rgba(44,197,218,.33);
+  --good:#4FD9A3; --bad:#FF7A61; --pen:#FF6B6B;
+}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;font-family:var(--body);color:var(--text);font-size:17px;line-height:1.55;background-color:var(--paper);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:26px 26px}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--ink);outline-offset:2px;border-radius:4px}
+.app{max-width:920px;margin:0 auto;padding:18px 14px 70px}
+header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:20px}
+h1{font-family:var(--hand);font-weight:700;font-size:clamp(2.2rem,6.5vw,3.2rem);line-height:1;margin:0;color:var(--ink)}
+h1 span{background:linear-gradient(transparent 38%,var(--orange) 38% 88%,transparent 88%);padding:0 .15em}
+.sub{margin:6px 0 0;color:var(--muted);font-size:.95rem}
+nav{display:flex;flex-wrap:wrap;gap:6px}
+nav button{border:2px solid var(--line);background:var(--card);border-radius:999px;padding:7px 15px;cursor:pointer;font-weight:500;font-size:.95rem}
+nav button[aria-current="true"]{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 22px 24px;margin-bottom:16px}
+.panel h2{font-family:var(--hand);font-size:2.2rem;line-height:1.05;margin:0 0 8px;color:var(--ink)}
+.panel h3{font-family:var(--hand);font-size:1.65rem;margin:18px 0 4px}
+.muted{color:var(--muted)}
+.btn{border:2px solid var(--ink);background:var(--ink);color:var(--paper);padding:9px 18px;border-radius:10px;cursor:pointer;font-weight:600}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.small{padding:5px 12px;font-size:.9rem}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.hl-o{background:linear-gradient(transparent 40%,var(--orange) 40% 90%,transparent 90%)}
+.hl-p{background:linear-gradient(transparent 40%,var(--pink) 40% 90%,transparent 90%)}
+.hl-c{background:linear-gradient(transparent 40%,var(--cyan) 40% 90%,transparent 90%)}
+
+/* ---------- PLAN ---------- */
+.days{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.day{background:var(--card);border:2px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.day.today{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.day .dn{font-family:var(--hand);font-size:1.9rem;line-height:1;color:var(--ink);display:flex;justify-content:space-between;align-items:baseline}
+.day .done{font-family:var(--hand);font-size:1.6rem;color:var(--pen)}
+.day .what{font-size:.95rem}
+.day .row{margin-top:auto}
+.tl{font-size:.9rem;color:var(--muted)}
+.link{display:inline;border:0;background:none;padding:0;color:var(--ink);text-decoration:underline;text-underline-offset:3px;cursor:pointer;font-size:inherit;text-align:left}
+.weak{margin-top:6px}
+.weak li{margin:2px 0}
+
+/* ---------- POWTÓRKA ---------- */
+.learn{display:grid;grid-template-columns:240px 1fr;gap:18px;align-items:start}
+.toc{display:flex;flex-direction:column;gap:3px;position:sticky;top:calc(10px + env(safe-area-inset-top,0px))}
+.toc button{text-align:left;border:0;background:transparent;padding:7px 10px;border-radius:6px;cursor:pointer;font-size:.93rem;color:var(--text)}
+.toc button[aria-current="true"]{background:var(--card);box-shadow:inset 3px 0 0 var(--ink);font-weight:600}
+.sheet{background:var(--card);border:1px solid var(--line);border-radius:4px 14px 14px 4px;padding:20px 22px 24px;box-shadow:inset 34px 0 0 -32px var(--pen)}
+.sheet h2{font-family:var(--hand);font-size:2.2rem;line-height:1.1;margin:0 0 6px;color:var(--ink)}
+.sheet h3{font-family:var(--hand);font-size:1.6rem;margin:18px 0 4px}
+.sheet p,.sheet li{max-width:66ch}
+.sheet .src{color:var(--muted);font-size:.88rem;margin:0 0 10px}
+.ex{font-family:var(--hand);font-size:1.55rem;line-height:1.35;color:var(--ink);margin:6px 0;padding-left:12px;border-left:3px solid var(--line)}
+.trap{border:2px solid var(--pen);border-radius:10px;padding:10px 14px;margin:14px 0}
+.trap b:first-child{color:var(--pen)}
+.key{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:8px 0}
+.key .k{font-family:var(--hand);font-size:1.5rem;line-height:1.2;color:var(--ink)}
+.sq{border-collapse:collapse;margin:6px 0;font-variant-numeric:tabular-nums}
+.sq td{border:1px solid var(--line);padding:3px 9px;text-align:center}
+
+/* bar model */
+.bars{border:1px dashed var(--line);border-radius:10px;padding:12px 14px;margin:10px 0}
+.bars .ctl{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-bottom:10px}
+.bars label{display:flex;align-items:center;gap:8px;font-size:.95rem}
+.bars input[type=range]{accent-color:var(--ink);width:120px}
+.bar{display:grid;grid-template-columns:150px 1fr;gap:10px;align-items:center;margin:6px 0}
+.bar .lab{font-size:.9rem}
+.bar .track{display:flex;gap:2px;min-height:30px}
+.seg{border:2px solid var(--ink);border-radius:4px;display:grid;place-items:center;font-size:.8rem;font-weight:600;min-width:0;overflow:hidden}
+.seg.base{background:var(--cyan)}
+.seg.add{background:var(--orange)}
+.bar .res{grid-column:2;font-family:var(--hand);font-size:1.4rem;color:var(--ink);line-height:1}
+/* dots */
+.dots{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.grp{display:flex;gap:4px;padding:5px;border:2px dashed var(--ink);border-radius:10px}
+.grp.left{border-color:var(--pen)}
+.dot{width:16px;height:16px;border-radius:50%;background:var(--ink)}
+.grp.left .dot{background:var(--pen)}
+
+/* ---------- ZADANIA ---------- */
+.task{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:12px}
+.thead{display:flex;gap:12px;align-items:flex-start;margin-bottom:8px}
+.tnum{flex:none;width:2.1em;height:2.1em;border:2px solid var(--ink);border-radius:50%;display:grid;place-items:center;font-family:var(--hand);font-weight:700;font-size:1.35rem;color:var(--ink)}
+.tins{font-weight:500;padding-top:6px}
+.tpts{margin-left:auto;color:var(--muted);font-size:.85rem;padding-top:8px;white-space:nowrap}
+.items{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px 22px}
+.items.wide{grid-template-columns:1fr}
+.items.two{grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
+.it{display:flex;gap:8px;align-items:baseline;line-height:2.1}
+.it .lt{color:var(--muted);flex:none}
+.it .tx{flex:1}
+input.blank{width:4.4em;padding:3px 6px;font-size:1.05rem;border:2px solid var(--line);border-radius:7px;background:var(--paper);text-align:center;color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
+sup input.blank{width:2.6em;font-size:.85rem;padding:1px 3px}
+input.blank.ok{border-color:var(--good);background:var(--cyan)}
+input.blank.no{border-color:var(--bad);background:var(--orange)}
+.copts{display:grid;gap:6px;margin-top:6px}
+.copt{display:flex;gap:10px;align-items:center;text-align:left;border:2px solid var(--line);background:var(--card);border-radius:9px;padding:8px 12px;cursor:pointer;width:100%}
+.copt .box{flex:none;width:20px;height:20px;border:2px solid var(--line);border-radius:50%;display:grid;place-items:center;font-size:.8rem;font-weight:700}
+.copt.sel{border-color:var(--ink);background:var(--pink)}
+.copt.sel .box{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+.copt.ok{border-color:var(--good);background:var(--cyan)}
+.copt.no{border-color:var(--bad);background:var(--orange)}
+.copt:disabled{cursor:default}
+.topbar{position:sticky;top:calc(6px + env(safe-area-inset-top,0px));z-index:5;display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px 14px;margin-bottom:12px;font-variant-numeric:tabular-nums}
+.topbar .clock{font-weight:600}
+.topbar .clock.warn{color:var(--pen)}
+
+/* ---------- TRENING ---------- */
+.tlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.tbtn{text-align:left;border:2px solid var(--line);background:var(--card);border-radius:10px;padding:10px 12px;cursor:pointer}
+.tbtn:hover{border-color:var(--ink)}
+.acc{height:6px;background:var(--line);border-radius:6px;overflow:hidden;margin-top:6px}
+.acc i{display:block;height:100%;background:var(--ink)}
+.tbtn small{color:var(--muted)}
+.progress{height:6px;background:var(--line);border-radius:6px;overflow:hidden;margin-bottom:12px}
+.progress i{display:block;height:100%;background:var(--ink);transition:width .25s}
+.qtext{font-size:1.2rem;line-height:1.9;margin:6px 0 4px}
+.fb{margin-top:14px;padding:12px 14px;border-radius:10px;border:2px solid}
+.fb.ok{border-color:var(--good)}.fb.half{border-color:var(--ink)}.fb.no{border-color:var(--bad)}
+.fb b{display:block;margin-bottom:3px}
+.steps{font-family:var(--hand);font-size:1.4rem;line-height:1.35;color:var(--ink);margin-top:4px}
+
+/* ---------- WYNIKI ---------- */
+.result-top{display:flex;flex-wrap:wrap;align-items:center;gap:18px 28px}
+.grade{position:relative;width:140px;height:140px;flex:none}
+.grade svg{position:absolute;inset:0;width:100%;height:100%}
+.grade .digit{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--hand);font-weight:700;font-size:5.6rem;line-height:1;color:var(--pen)}
+.grade path{fill:none;stroke:var(--pen);stroke-width:4;stroke-linecap:round;stroke-dasharray:620;stroke-dashoffset:620;animation:draw 1s .2s ease-out forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.gname{font-family:var(--hand);font-size:2.3rem;line-height:1;color:var(--ink);margin:0}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.chip{border:1px solid var(--line);border-radius:999px;padding:3px 10px;font-size:.85rem}
+.chip.bad{border-color:var(--bad)}
+.review{list-style:none;padding:0;margin:18px 0 0}
+.review li{border-top:1px solid var(--line);padding:12px 0}
+.review .mk{font-weight:700;margin-right:6px}
+.review .mk.ok{color:var(--good)}.review .mk.no{color:var(--bad)}.review .mk.half{color:var(--ink)}
+.review .row2{font-size:.95rem;margin-top:2px}
+table.hist{border-collapse:collapse;width:100%;font-size:.93rem}
+table.hist td,table.hist th{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+table.hist .g{font-family:var(--hand);font-size:1.6rem;color:var(--pen);line-height:1}
+details{margin-top:14px}
+summary{cursor:pointer;color:var(--muted)}
+.scale td{padding:3px 10px 3px 0}
+.scale input{width:4.2em;padding:3px 6px;border:1px solid var(--line);border-radius:6px;background:var(--paper)}
+
+.pre{margin:4px 0 8px}
+.learn>*{min-width:0}
+svg.axis{width:100%;max-width:640px;height:auto;display:block}
+svg.axis line,svg.axis polyline{stroke:var(--text);stroke-width:2;fill:none}
+svg.axis .lb{font:600 20px var(--body);fill:var(--text);text-anchor:middle}
+svg.axis .pt{fill:var(--pen)}
+svg.axis .pl{font:700 22px var(--body);fill:var(--pen);text-anchor:middle}
+.sgn{display:inline-flex;gap:4px;vertical-align:middle;margin:0 4px}
+.sg{width:2.4em;height:2.1em;border:2px solid var(--line);border-radius:8px;background:var(--paper);font-weight:700;font-size:1.05rem;cursor:pointer;color:var(--ink)}
+.sg.sel{border-color:var(--ink);background:var(--pink)}
+.sg.ok{border-color:var(--good);background:var(--cyan)}
+.sg.no{border-color:var(--bad);background:var(--orange)}
+.sg:disabled{cursor:default}
+.corr{color:var(--good);font-weight:600}
+table.pv{border-collapse:collapse;font-variant-numeric:tabular-nums;margin-top:6px}
+table.pv th,table.pv td{border:1px solid var(--line);padding:3px 8px;text-align:center;min-width:2em}
+table.pv th{font-size:.8rem;font-weight:600}
+table.pv td{font-family:var(--hand);font-size:1.8rem;color:var(--ink);line-height:1.1;height:1.5em}
+table.pv .g1{background:var(--soft)}
+.chip-s{border:2px solid var(--line);background:var(--card);border-radius:999px;padding:3px 11px;cursor:pointer}
+.chip-s.on{border-color:var(--ink);background:var(--pink)}
+.ladder{display:flex;flex-wrap:wrap;align-items:center;gap:4px;margin:12px 0 4px}
+.ladder .u{font-family:var(--hand);font-size:1.8rem;line-height:1;color:var(--ink);border:2px solid var(--ink);border-radius:10px;padding:4px 12px;background:var(--card)}
+.ladder .ar{display:flex;flex-direction:column;align-items:center;font-size:.8rem;color:var(--muted);min-width:3.6em;line-height:1.15}
+.ladder .ar i{font-style:normal;white-space:nowrap}
+.rule{display:grid;gap:4px;margin:6px 0 10px;font-size:.95rem}
+.uwt{border-collapse:collapse;margin-top:4px}
+.uwt td{padding:3px 12px 3px 0;font-variant-numeric:tabular-nums}
+.uwt tr.cur td:first-child{background:var(--pink)}
+.bars select{font:inherit;padding:4px 8px;border:2px solid var(--line);border-radius:8px;background:var(--card);color:var(--text)}
+.zesz{margin-top:14px}
+.ztab{overflow-x:auto}
+.ztab table{border-collapse:collapse;width:100%;font-size:.93rem;margin:6px 0}
+.ztab th,.ztab td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+.ztab td:first-child{white-space:nowrap;color:var(--muted)}
+.colw{display:inline-block;font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;white-space:pre;line-height:1.25;font-size:1.15rem;color:var(--ink);font-style:normal}
+.colw>span{display:block}
+.colw .cr{border-top:2px solid var(--ink);margin-top:2px;padding-top:2px}
+.rwout .steps,.cwout{margin-top:6px}
+.keyd{margin-top:14px}
+.keyd summary{cursor:pointer;font-weight:600}
+.keyd h3{margin:14px 0 4px}
+@media (max-width:720px){
+  .learn{grid-template-columns:1fr}
+  .toc{position:static;flex-direction:row;overflow-x:auto;padding-bottom:6px}
+  .toc button{white-space:nowrap}
+  .panel,.sheet{padding:16px 14px 20px}
+  .bar{grid-template-columns:1fr}
+  .bar .res{grid-column:1}
+  .items{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){.grade path{animation:none;stroke-dashoffset:0}.progress i{transition:none}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div>
+      <h1><span>Matematyka, klasa 4</span></h1>
+      <p class="sub">Liczby naturalne, system rzymski, działania, jednostki, zegar – 3 dni powtórki przed klasówką</p>
+    </div>
+    <nav id="nav">
+      <button data-v="plan">Plan</button>
+      <button data-v="learn">Powtórka</button>
+      <button data-v="train">Trening</button>
+      <button data-v="test">Klasówka</button>
+      <button data-v="results">Wyniki</button>
+    </nav>
+  </header>
+  <main id="main"></main>
+</div>
+
+<script>
+/* ================= POMOCNICZE ================= */
+const R=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+const fmt=n=>typeof n==='number'&&n>=10000?String(n).replace(/\B(?=(\d{3})+(?!\d))/g,'\u00a0'):String(n);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const pts=n=>String(Math.round(n*10)/10).replace('.',',');
+function store(k,v){try{if(v===undefined){const r=localStorage.getItem(k);return r?JSON.parse(r):null}localStorage.setItem(k,JSON.stringify(v))}catch(e){return null}}
+const B='[]';
+
+/* ================= TEMATY ================= */
+const TOPICS=[
+ {id:'sys',name:'System dziesiątkowy i porównywanie',src:'podręcznik s. 267, zad. 23–27 · Przed klasówką zad. 1, 5, 6'},
+ {id:'rzym',name:'System rzymski',src:'zadania powtórkowe 39–41 · Przed klasówką zad. 9, 10'},
+ {id:'pam',name:'Rachunki pamięciowe i kolejność działań',src:'podręcznik s. 267, zad. 28–31'},
+ {id:'pis',name:'Dodawanie i odejmowanie pisemne',src:'zadania powtórkowe 42–46'},
+ {id:'jedn',name:'Jednostki: długość, masa, pieniądze',src:'podręcznik s. 267, zad. 32–35 i zad. 36–38 · Przed klasówką zad. 2, 3, 4, 7'},
+ {id:'czas',name:'Zegar i kalendarz',src:'Przed klasówką zad. 8, 11, 12'},
+];
+const tname=id=>TOPICS.find(t=>t.id===id).name;
+const SG='[?]',LT='&lt;',GT='&gt;';
+const sgH=s=>s==='<'?LT:GT;
+const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
+/* ================= JEDNOSTKI ================= */
+const LEN={mm:1,cm:10,dm:100,m:1000,km:1000000};
+const MAS={g:1,dag:10,kg:1000,t:1000000};
+const LN=['mm','cm','dm','m','km'],MN=['g','dag','kg','t'];
+const UW={mm:'milimetr',cm:'centymetr',dm:'decymetr',m:'metr',km:'kilometr',g:'gram',dag:'dekagram',kg:'kilogram',t:'tona'};
+const FAC=u=>LEN[u]??MAS[u];
+// zapis kwoty w groszach
+const zgT=g=>g<100?`${g} gr`:`${fmt(Math.floor(g/100))} zł${g%100?` ${g%100} gr`:''}`;
+// zapis wielkości (w najmniejszej jednostce) w dwóch jednostkach, np. 4056 m → 4 km 56 m
+function two(v,big,small){const r=FAC(big)/FAC(small),a=Math.floor(v/r),b=v%r;return a?`${fmt(a)} ${big}${b?` ${fmt(b)} ${small}`:''}`:`${fmt(b)} ${small}`}
+function ratioWhy(from,to,v,res){const f=FAC(from),t=FAC(to);
+  if(f>t){const r=f/t;return `1 ${from} = ${fmt(r)} ${to}. Zamieniasz na <b>mniejszą</b> jednostkę, więc liczba <b>rośnie</b> – mnożysz: ${fmt(v)} · ${fmt(r)} = ${fmt(res)}.`}
+  const r=t/f;return `${fmt(r)} ${from} = 1 ${to}. Zamieniasz na <b>większą</b> jednostkę, więc liczba <b>maleje</b> – dzielisz: ${fmt(v)} : ${fmt(r)} = ${fmt(res)}.`}
+const smallK=()=>pick([R(2,9),R(2,9),R(10,99),R(10,99),R(100,999)]);
+function conv(pairs){const [from,to]=pick(pairs),f=FAC(from),t=FAC(to);let v,res;
+  if(f>t){v=smallK();if(f/t>=1000&&v>99)v=R(2,99);res=v*f/t}else{res=smallK();v=res*t/f}
+  return {t:'fill',q:`${fmt(v)} ${from} = ${B} ${to}`,ans:[res],why:ratioWhy(from,to,v,res)}}
+function twoUnits(from,tos){const need=Math.max(...tos.map(FAC),FAC(from)),step=need/FAC(from);
+  const v=Math.max(1,step)*pick([R(2,9),R(2,9),R(10,60)]),base=v*FAC(from),res=tos.map(u=>base/FAC(u));
+  return {t:'fill',q:`${fmt(v)} ${from} = ${B} ${tos[0]} = ${B} ${tos[1]}`,ans:res,why:tos.map((u,i)=>ratioWhy(from,u,v,res[i])).join('<br>')}}
+function compToOne(pairs){const [big,small]=pick(pairs),r=FAC(big)/FAC(small),a=pick([R(1,9),R(2,15),R(10,60)]),b=pick([R(1,9),R(1,9),r>10?R(10,r-1):R(1,9)]);const res=a*r+b;
+  return {t:'fill',q:`${a} ${big} ${b} ${small} = ${B} ${small}`,ans:[res],why:`${a} ${big} = ${fmt(a*r)} ${small}, do tego ${b} ${small}: ${fmt(a*r)} + ${b} = ${fmt(res)} ${small}.`+(String(b).length<String(r).length-1?` Uwaga na zera: ${b} ${small} to „${String(b).padStart(String(r).length-1,'0')}” na końcu.`:'')}}
+function oneToComp(pairs){const [big,small]=pick(pairs),r=FAC(big)/FAC(small),a=pick([R(1,9),R(2,40)]),b=r>10?pick([R(1,9),R(10,r-1),R(10,r-1)]):R(1,9),v=a*r+b;
+  return {t:'fill',q:`${fmt(v)} ${small} = ${B} ${big} ${B} ${small}`,ans:[a,b],why:`${fmt(r)} ${small} = 1 ${big}. W ${fmt(v)} mieści się ${a} razy po ${fmt(r)}, czyli ${a} ${big} (${fmt(a*r)} ${small}), i zostaje ${b} ${small}.`}}
+function unitChoice(list,units,lead){const [txt,u]=pick(list);
+  return {t:'choice',q:`${lead?lead+' ':''}${txt} …`,opts:units,okIdx:units.indexOf(u),keep:true,why:`Poprawnie: ${txt} ${u}. ${UHINT[u]||''}`}}
+const UHINT={mm:'Milimetrów używamy do bardzo małych rzeczy (1 mm to odstęp między kreseczkami na linijce).',cm:'Centymetrów używamy do przedmiotów, które da się zmierzyć linijką lub miarką krawiecką.',dm:'1 dm = 10 cm – mniej więcej szerokość dłoni.',m:'Metrów używamy do dużych przedmiotów: pokoju, samochodu, budynku.',km:'Kilometrów używamy do odległości między miejscowościami i długości rzek.',
+  g:'Gramów używamy do bardzo lekkich rzeczy (złotówka waży 5 g).',dag:'Dekagramów używamy do owoców i warzyw na sztuki, wędliny, sera (jabłko ok. 12–15 dag).',kg:'Kilogramów używamy do zwierząt, ludzi, mebli.',t:'Ton używamy do bardzo ciężkich rzeczy: samochodów, słoni, wagonów.'};
+const LUNITS=[['Bucik ma długość 28','cm'],['Biedronka ma długość 8','mm'],['Kiosk ma wysokość 4','m'],['Do Warszawy jest jeszcze 160','km'],['Drzwi mają wysokość 210','cm'],['Samochód ma długość 5','m'],['Blat stołu ma grubość 30','mm'],['Głębokość komody wynosi 4','dm'],['Piórnik Wojtka ma długość 21','cm'],['Pokój Agatki ma szerokość 3','m'],['Dom Bartka jest oddalony od szkoły o 2','km'],['Moneta pięciozłotowa ma grubość 2','mm'],['Bieżnia stadionu ma długość 400','m']];
+const MUNITS=[['Pomidor waży 15','dag'],['Pudełko zapałek waży 10','g'],['Słoń waży 5','t'],['Owca waży 20','kg'],['Jabłko waży 15','dag'],['Kanapa waży 56','kg'],['Krowa waży 520','kg'],['Samochód osobowy waży 2','t'],['Jajko waży 65','g'],['Świerszcz waży 12','g'],['Pies waży 12','kg'],['Złotówka waży 5','g'],['Kot pani Joli waży 4','kg'],['Wagon tramwaju waży 20','t'],['Arbuz waży 4','kg']];
+const ACC=['kredki','farby','zeszyt','blok rysunkowy','piórnik','linijkę','klej','plastelinę','żaglówkę','misia','samolot'];
+const SZT=[['zeszyt','zeszyty','zeszytów'],['długopis','długopisy','długopisów'],['ołówek','ołówki','ołówków'],['wafelek','wafelki','wafelków']];
+const decl=(n,f)=>{if(n===1)return f[0];const t=n%100,u=n%10;return (u>=2&&u<=4&&!(t>=12&&t<=14))?f[1]:f[2]};
+const price=(lo,hi)=>R(lo,hi)*100+pick([R(1,9)*10,R(11,99),R(5,95)]);
+
+/* ================= POMOCNICZE: RZYMSKIE, SŁUPKI, CZAS ================= */
+const RV=[[1000,'M'],[900,'CM'],[500,'D'],[400,'CD'],[100,'C'],[90,'XC'],[50,'L'],[40,'XL'],[10,'X'],[9,'IX'],[5,'V'],[4,'IV'],[1,'I']];
+const RM={I:1,V:5,X:10,L:50,C:100,D:500,M:1000};
+function rom(n){let s='';for(const [v,r] of RV)while(n>=v){s+=r;n-=v}return s}
+function arab(s){let t=0;for(let i=0;i<s.length;i++){const a=RM[s[i]],b=RM[s[i+1]]||0;t+=b>a?-a:a}return t}
+const validR=s=>s.length>0&&/^[IVXLCDM]+$/.test(s)&&rom(arab(s))===s;
+function romParts(n){const out=[];for(const [v,r] of RV)while(n>=v){out.push(`${r} = ${v}`);n-=v}return out.join(', ')}
+// rozbicie na rzędy: 2390 = 2000 + 300 + 90 → MM + CCC + XC
+function romWhy(n){const p=[];let rest=n;[1000,100,10,1].forEach(u=>{const d=Math.floor(rest/u)*u;rest%=u;if(d)p.push([d,rom(d)])});
+  return `${fmt(n)} = ${p.map(x=>x[0]).join(' + ')} → ${p.map(x=>x[1]).join(' + ')} = ${rom(n)}`}
+function addAdditive(n){let s='';for(const [v,r] of [[1000,'M'],[500,'D'],[100,'C'],[50,'L'],[10,'X'],[5,'V'],[1,'I']])while(n>=v){s+=r;n-=v}return s}
+// słupek do dodawania i odejmowania
+function column(nums,op,res){const w=Math.max(...nums.map(x=>String(x).length),String(res).length)+1;
+  const lines=nums.map((x,i)=>(i===nums.length-1?op:' ')+String(x).padStart(w-1,' '));
+  return `<span class="colw"><span>${lines.join('\n')}</span><span class="cr">${String(res).padStart(w,' ')}</span></span>`}
+function carriesAdd(nums){let c=0,cs=0;const L=Math.max(...nums.map(x=>String(x).length));for(let i=0;i<L;i++){const s=nums.reduce((a,x)=>a+Math.floor(x/10**i)%10,0)+c;c=Math.floor(s/10);if(c)cs++}return cs}
+function borrowsSub(a,b){let c=0,bs=0;const L=String(a).length;for(let i=0;i<L;i++){const d=Math.floor(a/10**i)%10-c-Math.floor(b/10**i)%10;c=d<0?1:0;if(c)bs++}return bs}
+const hm=m=>`${Math.floor(m/60)}:${String(m%60).padStart(2,'0')}`;
+const DNI=['poniedziałek','wtorek','środa','czwartek','piątek','sobota','niedziela'];
+const DNI_B=['w poniedziałek','we wtorek','w środę','w czwartek','w piątek','w sobotę','w niedzielę'];
+const MIES31=['stycznia','marca','maja','lipca','sierpnia','października','grudnia'];
+const RZ=['jedności','dziesiątek','setek','tysięcy','dziesiątek tysięcy','setek tysięcy','milionów','dziesiątek milionów'];
+const randDigitsNum=len=>{let s=String(R(1,9));for(let i=1;i<len;i++)s+=R(0,9);return +s};
+
+/* ================= GENERATORY ================= */
+const G={
+ sys:{
+  digit(){const n=randDigitsNum(R(6,8)),L=String(n).length,i=R(1,L-1),d=Math.floor(n/10**i)%10;
+    return {t:'fill',q:`Jaka cyfra stoi w rzędzie ${RZ[i]} w liczbie ${fmt(n)}? ${B}`,ans:[d],why:`Licz rzędy od prawej: jedności, dziesiątki, setki, tysiące… W liczbie ${fmt(n)} cyfra ${RZ[i]} to ${d}.`}},
+  digitSum(){let n,i,j,a,b;do{n=randDigitsNum(R(6,8));const L=String(n).length;i=R(1,L-1);do{j=R(0,L-1)}while(j===i);a=Math.floor(n/10**i)%10;b=Math.floor(n/10**j)%10}while(a+b===0);
+    return {t:'fill',q:`Oblicz sumę cyfry ${RZ[i]} i cyfry ${RZ[j]} liczby ${fmt(n)}. ${B}`,ans:[a+b],why:`Cyfra ${RZ[i]}: ${a}, cyfra ${RZ[j]}: ${b}. Suma: ${a} + ${b} = ${a+b}.`}},
+  zeros(){const K=pick([[10,1,'10'],[100,2,'100'],[1000,3,'1000']]),M=pick([['tysiąc',3],['milion',6],['milion',6],['miliard',9]]);
+    return {t:'fill',q:`Ile zer ma liczba ${K[2]} razy większa niż ${M[0]}? ${B}`,ans:[K[1]+M[1]],why:`${cap(M[0])} ma ${M[1]} zer. Mnożenie przez ${K[2]} dopisuje ${K[1]} ${K[1]===1?'zero':'zera'}: ${M[1]} + ${K[1]} = ${K[1]+M[1]}.`}},
+  maxNum(){const [a,b,c]=shuffle([3,4,5,2]).slice(0,3).sort((x,y)=>x-y),v=R(1,2);const W={2:'dwucyfrowej',3:'trzycyfrowej',4:'czterocyfrowej',5:'pięciocyfrowej'};
+    if(v===1){const s=10**a-1+10**b-1+10**c-1;return {t:'fill',q:`Oblicz sumę największej liczby ${W[a]}, największej liczby ${W[b]} i największej liczby ${W[c]}. ${B}`,ans:[s],why:`Największe liczby to same dziewiątki: ${fmt(10**a-1)} + ${fmt(10**b-1)} + ${fmt(10**c-1)} = ${fmt(s)}.`}}
+    const s=10**b-1-10**(a-1);const W2={2:'dwucyfrową',3:'trzycyfrową',4:'czterocyfrową',5:'pięciocyfrową'};return {t:'fill',q:`Od największej liczby ${W[b]} odejmij najmniejszą liczbę ${W2[a]}. ${B}`,ans:[s],why:`Największa liczba ${W[b]} to ${fmt(10**b-1)}, najmniejsza ${W[a]} to ${fmt(10**(a-1))} (jedynka i same zera). ${fmt(10**b-1)} − ${fmt(10**(a-1))} = ${fmt(s)}.`}},
+  minMax(){const k=R(4,5);let d;do{d=shuffle([0,1,2,3,4,5,6,7,8,9]).slice(0,k)}while(false);
+    const mx=+[...d].sort((a,b)=>b-a).join('');let mn=[...d].sort((a,b)=>a-b);if(mn[0]===0){const i=mn.findIndex(x=>x>0);[mn[0],mn[i]]=[mn[i],mn[0]]}mn=+mn.join('');
+    return {t:'fill',q:`Z cyfr ${d.join(', ')} (każda raz) utwórz liczbę ${k===4?'czterocyfrową':'pięciocyfrową'} jak największą i jak najmniejszą. Największa: ${B}, najmniejsza: ${B}`,ans:[mx,mn],why:`Największa: cyfry od największej do najmniejszej → ${fmt(mx)}. Najmniejsza: od najmniejszej${d.includes(0)?', ale liczba nie może zaczynać się od 0, więc na początek najmniejsza cyfra różna od zera, a 0 zaraz za nią':''} → ${fmt(mn)}.`}},
+  tf(){const v=R(1,3);let a,b;
+    if(v===1){a=R(100,999)*1000+R(0,999);b=Math.floor(a/10)+R(-9,9)*100;}else if(v===2){a=R(10,99)*1000+R(0,999);b=+String(a).split('').reverse().join('');if(String(b).length!==String(a).length)b=a+R(1,9)*1000}else{a=R(100,999);b=a+pick([-1,1])*R(1,20)}
+    if(a===b)b++;const sg=Math.random()<.5?'<':'>',truth=sg==='<'?a<b:a>b;
+    return {t:'choice',q:`Prawda czy fałsz: ${fmt(a)} ${sgH(sg)} ${fmt(b)}`,opts:['Prawda','Fałsz'],okIdx:truth?0:1,keep:true,why:`${String(a).length!==String(b).length?`Liczba ${fmt(a)} ma ${String(a).length} cyfr, a ${fmt(b)} – ${String(b).length}. Więcej cyfr = większa liczba.`:'Obie liczby mają tyle samo cyfr – porównuj od lewej, aż trafisz na różne cyfry.'} ${fmt(a)} ${a<b?LT:GT} ${fmt(b)}, więc zdanie jest ${truth?'prawdziwe':'fałszywe'}.`}},
+  cmp(){const L=R(4,7),a=randDigitsNum(L);let b;do{const s=String(a).split('');const i=R(1,L-1);s[i]=String(R(0,9));b=+s.join('')}while(b===a);
+    const ans=a<b?'<':'>';return {t:'fill',q:`${fmt(a)} ${SG} ${fmt(b)}`,ans:[ans],why:`Tyle samo cyfr, więc porównuj od lewej. Pierwsza różna cyfra rozstrzyga: ${fmt(a)} ${sgH(ans)} ${fmt(b)}.`}},
+  puzzle(){const P=[
+    {q:'Ile jest liczb trzycyfrowych mniejszych od 200, których zapis składa się z trzech różnych cyfr?',a:72,w:'Pierwsza cyfra to 1. Cyfra dziesiątek: 9 możliwości (bez 1), cyfra jedności: 8 możliwości (bez 1 i bez cyfry dziesiątek). 9 · 8 = 72.'},
+    {q:'Iga zapisała liczbę czterocyfrową, zamieniła cyfrę jedności z cyfrą setek, a cyfrę tysięcy i cyfrę dziesiątek zmniejszyła o 1. Otrzymała 6305. Jaką liczbę zapisała na początku?',a:7513,w:'Cofamy kroki od końca: 6305 → cyfrę tysięcy i dziesiątek zwiększamy o 1 → 7315 → zamieniamy z powrotem jedności i setki → 7513.'},
+    {q:'Kod PIN to liczba czterocyfrowa większa od 5000, suma jej cyfr to 10, a cyfra jedności jest o 2 mniejsza od cyfry tysięcy. Ile jest takich kodów?',a:4,w:'Cyfra tysięcy 5 → jedności 3, na środek zostaje 2: 5023, 5113, 5203. Cyfra tysięcy 6 → jedności 4, na środek 0: 6004. Przy 7 brakuje cyfr. Razem 4 kody.'},
+    {q:'Oblicz sumę kolejnych czterech liczb, z których pierwszą jest 345.',a:1386,w:'345 + 346 + 347 + 348 = 1386.'}];const p=pick(P);
+    return {t:'fill',q:`${p.q} ${B}`,ans:[p.a],why:p.w}},
+ },
+ rzym:{
+  toR(){const n=pick([R(11,99),R(11,99),R(100,999),R(100,999),R(1000,2999)]),ok=rom(n),cand=new Set();
+    const tries=[addAdditive(n),rom(n+1),rom(n-1),rom(n+10),rom(n-10),rom(n+100>3999?n-100:n+100),ok.replace('IX','VIIII').replace('XC','LXXXX'),ok.replace('XL','LX').replace('IV','VI'),ok.replace('CD','DC'),ok.replace('XC','CX')];
+    shuffle(tries).forEach(x=>{if(x&&x!==ok&&cand.size<3)cand.add(x)});
+    return {t:'choice',q:`Jak zapisać liczbę ${fmt(n)} w systemie rzymskim?`,opts:[ok,...cand],why:`${romWhy(n)}. Znak mniejszy przed większym oznacza odejmowanie (IV = 4, IX = 9, XL = 40, XC = 90, CD = 400, CM = 900).`}},
+  fromR(){const n=pick([R(11,99),R(100,999),R(100,999),R(1000,2999)]),s=rom(n);
+    return {t:'fill',q:`Odczytaj liczbę: ${s} = ${B}`,ans:[n],why:`${romParts(n)}. Razem ${fmt(n)}.`}},
+  rows(){const a=R(3,15),b=a+R(3,9),k=pick([12,15,18,20,25]);
+    return {t:'fill',q:`Uczniowie zajęli w kinie wszystkie miejsca w rzędach od ${rom(a)} do ${rom(b)}. W każdym rzędzie jest ${k} miejsc. Ilu uczniów przyszło do kina? ${B}`,ans:[(b-a+1)*k],why:`Rzędy od ${a} do ${b} to ${b} − ${a} + 1 = ${b-a+1} rzędów (pamiętaj o +1 – liczymy też pierwszy rząd). ${b-a+1} · ${k} = ${(b-a+1)*k}.`}},
+  remove(){let n,s,res;do{n=R(14,2999);s=rom(n);res=[...s].map((c,i)=>{const r=s.slice(0,i)+s.slice(i+1);return [c,r,validR(r)?arab(r):null]})}while(s.length<3||s.length>5||new Set(s).size!==s.length||res.some(x=>x[2]===null));
+    const want=Math.random()<.5?'największą':'najmniejszą',best=res.reduce((a,b)=>(want==='największą'?b[2]>a[2]:b[2]<a[2])?b:a);
+    return {t:'choice',q:`Który znak należy usunąć z liczby ${s} (${fmt(n)}), aby otrzymać liczbę jak ${want}?`,opts:[best[0],...res.filter(x=>x!==best).map(x=>x[0])],why:`Sprawdź każdy znak: ${res.map(x=>`bez ${x[0]} → ${x[1]} = ${fmt(x[2])}`).join('; ')}. Jak ${want}: bez ${best[0]}.`}},
+  cmpR(){let a,b;do{a=R(20,1500);b=a+pick([-1,1])*R(1,a>200?150:15)}while(b<1||a===b);const ans=a<b?'<':'>';
+    return {t:'fill',q:`${rom(a)} ${SG} ${rom(b)}`,ans:[ans],why:`${rom(a)} = ${fmt(a)}, ${rom(b)} = ${fmt(b)}. ${fmt(a)} ${sgH(ans)} ${fmt(b)}. Nie patrz na długość zapisu – XC (90) jest krótsze niż LXXX (80), a większe!`}},
+ },
+ pam:{
+  addSub(){const k=pick([300,110,250,R(2,9)*100,R(1,9)*1000+R(1,9)*100]),x=pick([R(5,99)*100,R(1000,9999),R(10,99)*1000+R(1,9)*100+pick([0,R(1,9)*10])]);if(x<=k)return G.pam.addSub();
+    return {t:'fill',q:`Do liczby ${fmt(x)} dodaj ${fmt(k)}, a potem od ${fmt(x)} odejmij ${fmt(k)}. Suma: ${B}, różnica: ${B}`,ans:[x+k,x-k],why:`${fmt(x)} + ${fmt(k)} = ${fmt(x+k)}; ${fmt(x)} − ${fmt(k)} = ${fmt(x-k)}. Licz rzędami: najpierw tysiące, potem setki, dziesiątki.`}},
+  times34(){const n=pick([R(11,99)*10,R(101,999),R(11,99)*100]);
+    return {t:'fill',q:`Znajdź liczbę 3 razy i 4 razy większą od ${fmt(n)}. 3 razy: ${B}, 4 razy: ${B}`,ans:[3*n,4*n],why:`3 · ${fmt(n)} = ${fmt(3*n)}; 4 · ${fmt(n)} = ${fmt(4*n)} (albo podwój dwa razy: ${fmt(2*n)} → ${fmt(4*n)}).`}},
+  divMul(){const d=pick([2,20,200,2000]),k=pick([R(2,9),R(11,99),R(2,9)*10,R(11,99)*10]),n=d*k*pick([1,10,100]);if(n>3e7||n*d>5e9)return G.pam.divMul();
+    return {t:'fill',q:`${fmt(n)} : ${fmt(d)} = ${B}, a ${fmt(n)} · ${fmt(d)} = ${B}`,ans:[n/d,n*d],why:`Dzielenie: skreśl tyle samo zer w obu liczbach (${fmt(n)} : ${fmt(d)} = ${fmt(n/d)}). Mnożenie: pomnóż liczby bez zer i dopisz wszystkie zera: ${fmt(n*d)}.`}},
+  order(){const v=R(1,3);
+    if(v===1){const A=R(1,9)*100,b=R(2,5),C=R(40,90)*100,D=R(10,C/100-10)*100,E=R(2,9)*100,F=100,r=A+b*(C-D)+E*F;
+      return {t:'fill',q:`${fmt(A)} + ${b} · (${fmt(C)} − ${fmt(D)}) + ${E} · ${F} = ${B}`,ans:[r],why:`Najpierw nawias: ${fmt(C)} − ${fmt(D)} = ${fmt(C-D)}. Potem mnożenia: ${b} · ${fmt(C-D)} = ${fmt(b*(C-D))} i ${E} · ${F} = ${fmt(E*F)}. Na końcu dodawanie: ${fmt(A)} + ${fmt(b*(C-D))} + ${fmt(E*F)} = ${fmt(r)}.`}}
+    if(v===2){const d=pick([30,40,60,90]),q=R(2,9)*1000,X=q*d,e=R(2,8),f=R(2,9)*100,Y=e*f+R(1,30)*100,r=q-(Y-e*f);if(r<=0)return G.pam.order();
+      return {t:'fill',q:`${fmt(X)} : ${d} − (${fmt(Y)} − ${e} · ${f}) = ${B}`,ans:[r],why:`W nawiasie najpierw mnożenie: ${e} · ${f} = ${fmt(e*f)}, potem ${fmt(Y)} − ${fmt(e*f)} = ${fmt(Y-e*f)}. Dzielenie: ${fmt(X)} : ${d} = ${fmt(q)}. Na końcu: ${fmt(q)} − ${fmt(Y-e*f)} = ${fmt(r)}.`}}
+    const a=R(2,9)*10,b=R(2,9)*10,c=R(2,5),p=pick([20,30,60]),P=p*R(2,9)*10,qq=10,Q=R(2,9)*100,r=a*b+c*(P/p+Q/qq);
+    return {t:'fill',q:`${a} · ${b} + ${c} · (${fmt(P)} : ${p} + ${fmt(Q)} : ${qq}) = ${B}`,ans:[r],why:`W nawiasie dzielenia: ${fmt(P)} : ${p} = ${P/p}, ${fmt(Q)} : ${qq} = ${Q/qq}, razem ${P/p+Q/qq}. Mnożenia: ${a} · ${b} = ${fmt(a*b)}, ${c} · ${P/p+Q/qq} = ${fmt(c*(P/p+Q/qq))}. Wynik: ${fmt(r)}.`}},
+  mul0(){const a=R(2,9)*pick([10,100]),b=R(2,9)*pick([10,100,1000]);
+    return {t:'fill',q:`${fmt(a)} · ${fmt(b)} = ${B}`,ans:[a*b],why:`Pomnóż cyfry bez zer (${String(a).replace(/0+$/,'')} · ${String(b).replace(/0+$/,'')} = ${(+String(a).replace(/0+$/,''))*(+String(b).replace(/0+$/,''))}) i dopisz wszystkie zera z obu liczb: ${fmt(a*b)}.`}},
+ },
+ pis:{
+  add(){const k=pick([2,2,3]);let n;do{n=Array.from({length:k},()=>pick([R(100,999),R(1000,9999),R(1000,9999),R(10000,99999)]))}while(carriesAdd(n)<2||n.reduce((a,b)=>a+b)>=1e6);const s=n.reduce((a,b)=>a+b);
+    return {t:'fill',q:`Oblicz pisemnie: ${n.map(fmt).join(' + ')} = ${B}`,ans:[s],why:`${column(n,'+',s)}<br>Podpisz cyfry pod cyframi (jedności pod jednościami). Licz od prawej; gdy wyjdzie 10 lub więcej, zapisz jedności, a dziesiątkę przenieś do następnej kolumny.`}},
+  sub(){let a,b;do{a=pick([R(300,999),R(1000,9999),R(1000,9999),R(10000,99999)]);b=pick([R(100,a-1),R(Math.floor(a/2),a-1)])}while(borrowsSub(a,b)<2);const r=a-b;
+    return {t:'fill',q:`Oblicz pisemnie: ${fmt(a)} − ${fmt(b)} = ${B}`,ans:[r],why:`${column([a,b],'−',r)}<br>Licz od prawej. Gdy cyfra na górze jest mniejsza, pożycz 1 z następnej kolumny (górna cyfra rośnie o 10, a sąsiednia maleje o 1). Uważaj na zera – pożyczka przechodzi dalej. Sprawdzenie: ${fmt(r)} + ${fmt(b)} = ${fmt(a)}.`}},
+  sub0(){const a=pick([R(1,9)*1000+R(0,9)*10+R(0,9),R(1,9)*1000+R(1,9)]),b=R(100,a-1);if(borrowsSub(a,b)<2)return G.pis.sub0();const r=a-b;
+    return {t:'fill',q:`Oblicz pisemnie: ${fmt(a)} − ${fmt(b)} = ${B}`,ans:[r],why:`${column([a,b],'−',r)}<br>Zera w odjemnej: pożyczka „przechodzi” przez zero (0 zmienia się w 9). Sprawdzenie dodawaniem: ${fmt(r)} + ${fmt(b)} = ${fmt(a)}.`}},
+  missing(){const b=R(1000,9999),c=R(1000,9999),s=b+c;
+    return {t:'fill',q:`Uzupełnij: ${fmt(b)} + ${B} = ${fmt(s)}`,ans:[c],why:`Brakujący składnik = suma − znany składnik: ${fmt(s)} − ${fmt(b)} = ${fmt(c)}.`}},
+  consec(){const n=R(100,999),k=pick([3,4,5]);let s=0;for(let i=0;i<k;i++)s+=n+i;
+    return {t:'fill',q:`Oblicz sumę ${k} kolejnych liczb, z których pierwszą jest ${n}. ${B}`,ans:[s],why:`${Array.from({length:k},(_,i)=>n+i).join(' + ')} = ${fmt(s)}.`}},
+  kaprekar(){let d;do{d=shuffle([0,1,2,3,4,5,6,7,8,9]).slice(0,4)}while(false);const mx=+[...d].sort((a,b)=>b-a).join(''),mn=+[...d].sort((a,b)=>a-b).join('');
+    return {t:'fill',q:`Z cyfr ${d.join(', ')} utwórz liczbę jak największą i jak najmniejszą (zero może stać na początku najmniejszej, jak w zadaniu 46), a potem odejmij. ${fmt(mx)} − ${String(mn).padStart(4,'0')} = ${B}`,ans:[mx-mn],why:`${column([mx,mn],'−',mx-mn)}<br>Ciekawostka z zadania 46: jeśli powtarzasz te kroki z wynikiem, po najwyżej 7 odejmowaniach dojdziesz do 6174.`}},
+ },
+ jedn:{
+  lenConv(){return conv([['cm','mm'],['dm','cm'],['m','cm'],['m','dm'],['km','m'],['m','mm'],['mm','cm'],['cm','m'],['m','km'],['dm','m']])},
+  lenComp(){return compToOne([['cm','mm'],['dm','cm'],['m','cm'],['km','m'],['m','mm']])},
+  massConv(){return conv([['kg','dag'],['kg','g'],['dag','g'],['t','kg'],['dag','kg'],['g','kg'],['g','dag'],['kg','t']])},
+  massComp(){return compToOne([['kg','dag'],['kg','g'],['dag','g'],['t','kg']])},
+  dbl(){const [big,small]=pick([['m','cm'],['cm','mm'],['km','m'],['kg','dag'],['t','kg'],['dag','g'],['kg','g']]),r=FAC(big)/FAC(small);let v;do{v=R(1,12)*r+R(1,r-1)}while(v%2);const d=v*2,h=v/2;
+    return {t:'fill',q:`${two(v,big,small)}: 2 razy ${big==='m'||big==='cm'||big==='km'?'dłuższa':'większa'} to ${B} ${big} ${B} ${small}, a 2 razy ${big==='m'||big==='cm'||big==='km'?'krótsza':'mniejsza'} to ${B} ${big} ${B} ${small}`,ans:[Math.floor(d/r),d%r,Math.floor(h/r),h%r],
+      why:`Zamień na ${small}: ${two(v,big,small)} = ${fmt(v)} ${small}. · 2 = ${fmt(d)} ${small} = ${two(d,big,small)}. : 2 = ${fmt(h)} ${small} = ${two(h,big,small)}.`}},
+  quarter(){const [big,small]=pick([['m','cm'],['km','m'],['cm','mm']]),r=FAC(big)/FAC(small);let v;do{v=R(2,20)*r+R(1,r-1)}while(v%4||(v/4)%r===0||(v/2)%r===0);const h=v/2,q=v/4;
+    return {t:'fill',q:`Jaką długość ma połowa, a jaką czwarta część odcinka ${two(v,big,small)}? Połowa: ${B} ${big} ${B} ${small}, czwarta część: ${B} ${big} ${B} ${small}`,ans:[Math.floor(h/r),h%r,Math.floor(q/r),q%r],
+      why:`${two(v,big,small)} = ${fmt(v)} ${small}. Połowa: ${fmt(v)} : 2 = ${fmt(h)} ${small} = ${two(h,big,small)}. Czwarta część to połowa połowy: ${fmt(h)} : 2 = ${fmt(q)} ${small} = ${two(q,big,small)}.`}},
+  cake(){const dag=R(2,5)*10,gs=R(2,9)*10,g2=R(1,4)*100,kg=pick([1,1,2]),tot=dag*10+gs+g2+kg*1000;
+    const ok=tot%10===0?`${tot/10} dag`:`${Math.floor(tot/1000)} kg ${tot%1000} g`;
+    const naive=dag+gs+g2+kg;const wrong=[`${kg} kg ${dag+gs+g2} g`,`${kg} kg ${dag+gs+g2} dag`,`${dag+(gs+g2)/10+kg*10} dag`,`${naive} dag`,`${kg} kg ${tot%1000+50} g`].filter(x=>x!==ok);
+    return {t:'choice',q:`Pani Gabrysia użyła do ciasta: ${dag} dag mąki, ${gs} g cukru, ${g2} g masła i ${kg} kg twarogu. Ile razem ważyły te produkty?`,opts:[ok,...shuffle([...new Set(wrong)]).slice(0,3)],why:`Zamień wszystko na gramy: ${dag} dag = ${dag*10} g, ${kg} kg = ${kg*1000} g. ${dag*10} + ${gs} + ${g2} + ${kg*1000} = ${fmt(tot)} g${tot%10===0?` = ${tot/10} dag`:''}.`}},
+  seg10(){const a=R(1,9),b=R(1,9),c=10*a+b;
+    return {t:'choice',q:`Wskaż długość odcinka 10 razy dłuższego od ${a} cm ${b} mm.`,opts:[`${c} cm`,`${a} cm ${10*b} mm`,`${10*a} cm ${b} mm`,`${c} dm`],why:`${a} cm ${b} mm = ${c} mm. 10 · ${c} mm = ${c*10} mm = ${c} cm.`}},
+  money(){const zl=R(11,99),gr=R(10,95),a=zl*100+gr,v=R(1,2);
+    if(v===1){const b=zl*1000+R(1,9)*100;return {t:'choice',q:'Która z podanych kwot jest mniejsza?',opts:[`${zl} zł ${gr} gr`,`${fmt(b)} gr`],keep:true,why:`${fmt(b)} gr = ${zgT(b)} (dwie ostatnie cyfry to grosze), a to dużo więcej niż ${zl} zł ${gr} gr. Mniejsza jest ${zl} zł ${gr} gr.`}}
+    const z2=R(100,199),a2=z2*100+gr,b=Math.random()<.5?Math.round(z2/10)*100:(z2+R(1,9))*100;return {t:'choice',q:'Która z podanych kwot jest większa?',opts:[`${z2} zł ${gr} gr`,`${fmt(b)} gr`],keep:true,okIdx:a2>b?0:1,why:`${fmt(b)} gr = ${zgT(b)} (odetnij dwie ostatnie cyfry). Porównaj: ${z2} zł ${gr} gr i ${zgT(b)} – większa jest ${a2>b?`${z2} zł ${gr} gr`:`${fmt(b)} gr`}.`}},
+  change(){const ch=R(3,9)*100+R(1,9)*10,n=R(2,4),bu=R(5,9)*10,P=pick([20,50,100]),s=ch+n*bu,r=P*100-s;
+    return {t:'fill',q:`Pani Ewa kupiła chleb za ${zgT(ch)} i ${n} ${n<5?'bułki':'bułek'} po ${bu} gr. Zapłaciła banknotem ${P}-złotowym. Ile reszty powinna otrzymać? ${B} zł ${B} gr`,ans:[Math.floor(r/100),r%100],why:`Bułki: ${n} · ${bu} gr = ${n*bu} gr${n*bu>=100?` = ${zgT(n*bu)}`:''}. Zakupy: ${zgT(ch)} + ${zgT(n*bu)} = ${zgT(s)}. Reszta: ${P} zł − ${zgT(s)} = ${zgT(r)}.`}},
+ },
+ czas:{
+  elapsed(){const s=R(8*60,20*60),d=R(15,170),e=s+d;
+    if(d<60)return {t:'fill',q:`Ile minut upłynie od godziny ${hm(s)} do godziny ${hm(e)}? ${B} min`,ans:[d],why:`Od ${hm(s)} do pełnej godziny ${hm(Math.ceil(s/60)*60)} jest ${Math.ceil(s/60)*60-s} min, dalej do ${hm(e)} jeszcze ${e-Math.ceil(s/60)*60} min. Razem ${d} min.`};
+    return {t:'fill',q:`Ile czasu upłynie od godziny ${hm(s)} do godziny ${hm(e)}? ${B} h ${B} min`,ans:[Math.floor(d/60),d%60],why:`Licz do pełnych godzin: od ${hm(s)} do ${hm(Math.ceil(s/60)*60)} to ${Math.ceil(s/60)*60-s} min, dalej do ${hm(e)} – ${e-Math.ceil(s/60)*60} min. Razem ${d} min = ${Math.floor(d/60)} h ${d%60} min.`}},
+  endTime(){const s=R(9*60,20*60),d=pick([R(75,150),105,110,95]),e=s+d;
+    const q=Math.random()<.5?`Film rozpoczął się o ${hm(s)} i trwał ${d} minut. O której się skończył?`:`Pociąg planowo miał przyjechać o ${hm(s)}. Miał ${d} minut spóźnienia. O której godzinie przyjechał?`;
+    return {t:'fill',q:`${q} ${B} : ${B}`,ans:[Math.floor(e/60),e%60],why:`${d} min = ${Math.floor(d/60)} h ${d%60} min. ${hm(s)} + ${Math.floor(d/60)} h = ${hm(s+60*Math.floor(d/60))}, + ${d%60} min = ${hm(e)}.${(s%60)+(d%60)>=60?' Gdy minut wyjdzie 60 lub więcej, zamień 60 min na 1 godzinę.':''}`}},
+  weekday(){const m=pick(MIES31),d1=R(1,10),d2=R(d1+8,31),w1=R(0,6),w2=(w1+(d2-d1))%7;const opts=[DNI[w2],...shuffle(DNI.filter((_,i)=>i!==w2)).slice(0,3)];
+    return {t:'choice',q:`Pewnego roku ${d1} ${m} wypadł ${DNI_B[w1]}. Jaki dzień tygodnia był ${d2} ${m}?`,opts,why:`Od ${d1} do ${d2} ${m} mija ${d2-d1} dni. Co 7 dni jest ten sam dzień tygodnia: ${d2-d1} = ${Math.floor((d2-d1)/7)} · 7 + ${(d2-d1)%7}. Od dnia „${DNI[w1]}” przesuń się o ${(d2-d1)%7} → ${DNI[w2]}.`}},
+  minutes(){const h=R(1,3),m=R(5,55);
+    return {t:'fill',q:`${h} h ${m} min – ile to minut? ${B}`,ans:[h*60+m],why:`1 h = 60 min. ${h} · 60 + ${m} = ${h*60+m} min.`}},
+ },
+};
+
+function make(topic,name){
+  let raw=G[topic][name]();for(let k=0;k<30&&raw.t==='fill'&&raw.ans.some(a=>a===0);k++)raw=G[topic][name]();
+  const it={...raw,topic,gen:[topic,name]};
+  if(it.t==='choice'){const oi=raw.okIdx??0;const o=raw.opts.map((x,i)=>({x,ok:i===oi}));it.opts=raw.keep?o:shuffle(o)}
+  return it;
+}
+function anyFrom(topic){return make(topic,pick(Object.keys(G[topic]).filter(n=>n!=='puzzle'||Math.random()<.4)))}
+
+/* ================= KLASÓWKA ================= */
+function buildTest(mode,topics){
+  const full=mode!=='short',has=t=>!topics||topics.includes(t);
+  const P=(t,n)=>make(t,n),X=(t,arr)=>make(t,pick(arr));
+  const SPEC=[
+    {tp:['sys'],ins:'Oceń prawdziwość nierówności.',f:()=>[P('sys','tf'),P('sys','tf'),P('sys','tf')],s:()=>[P('sys','tf'),P('sys','tf')]},
+    {tp:['sys'],ins:'Odpowiedz.',f:()=>[P('sys','digitSum'),P('sys','zeros'),X('sys',['maxNum','minMax','cmp'])],s:()=>[P('sys','digitSum'),P('sys','zeros')]},
+    {tp:['rzym'],ins:'System rzymski.',f:()=>[P('rzym','toR'),P('rzym','toR'),P('rzym','fromR'),P('rzym','fromR')],s:()=>[P('rzym','toR'),P('rzym','fromR')]},
+    {tp:['rzym'],ins:'Rozwiąż zadanie.',f:()=>[P('rzym','rows'),X('rzym',['remove','cmpR'])],s:()=>[P('rzym','rows')]},
+    {tp:['pam'],ins:'Oblicz w pamięci.',f:()=>[P('pam','divMul'),P('pam','times34'),P('pam','addSub')],s:()=>[X('pam',['divMul','times34'])]},
+    {tp:['pam'],ins:'Oblicz (pamiętaj o kolejności działań).',f:()=>[P('pam','order'),P('pam','order')],s:()=>[P('pam','order')]},
+    {tp:['pis'],ins:'Oblicz pisemnie.',f:()=>[P('pis','add'),P('pis','add'),P('pis','sub'),P('pis','sub0')],s:()=>[P('pis','add'),P('pis','sub')]},
+    {tp:['jedn'],ins:'Wybierz poprawną odpowiedź.',f:()=>[P('jedn','money'),P('jedn','seg10'),P('jedn','cake')],s:()=>[X('jedn',['money','seg10']),P('jedn','cake')]},
+    {tp:['jedn'],ins:'Uzupełnij.',f:()=>[P('jedn','lenComp'),P('jedn','massConv'),P('jedn','dbl')],s:()=>[X('jedn',['lenComp','massComp','lenConv','massConv'])]},
+    {tp:['jedn'],ins:'Rozwiąż zadanie.',f:()=>[P('jedn','change')],s:()=>[P('jedn','change')]},
+    {tp:['czas'],ins:'Zegar i kalendarz.',f:()=>[P('czas','weekday'),P('czas','elapsed'),P('czas','endTime')],s:()=>[P('czas','weekday'),X('czas',['elapsed','endTime'])]},
+  ];
+  return SPEC.filter(x=>x.tp.some(has)).map(x=>({ins:x.ins,items:full?x.f():x.s()})).filter(x=>x.items.length);
+}
+const maxPts=it=>it.t==='choice'?1:it.ans.length;
+/* ================= OCENIANIE ================= */
+const GRADES={6:'celujący',5:'bardzo dobry',4:'dobry',3:'dostateczny',2:'dopuszczający',1:'niedostateczny'};
+const MSG={6:'Bezbłędnie! Jesteś gotowa na sprawdzian.',5:'Świetnie! Popraw drobne błędy i będzie szóstka.',4:'Dobrze. Przejrzyj błędy i poćwicz słabsze tematy.',3:'Nieźle, ale warto jeszcze potrenować.',2:'Wróć do powtórki tematów z błędami.',1:'Przeczytaj powtórkę i spróbuj jeszcze raz.'};
+const DEF_SCALE={6:100,5:90,4:80,3:70,2:60};
+function getScale(){const s=store('m7-scale');return s&&s[2]!=null?s:{...DEF_SCALE}}
+function gradeFor(pct){const s=getScale();for(const g of [6,5,4,3,2]) if(pct>=s[g]-1e-9) return g;return 1}
+
+/* ================= STATYSTYKI ================= */
+function stats(){return store('m7-stats')||{}}
+function addStat(topic,ok){const s=stats();s[topic]=s[topic]||{ok:0,n:0};s[topic].n++;if(ok)s[topic].ok++;store('m7-stats',s)}
+function acc(topic){const s=stats()[topic];return s&&s.n?s.ok/s.n:null}
+function weakTopics(){return TOPICS.map(t=>({id:t.id,a:acc(t.id),n:(stats()[t.id]||{}).n||0})).filter(x=>x.n>=4&&x.a<0.8).sort((a,b)=>a.a-b.a)}
+
+/* ================= PLAN ================= */
+const PLAN=[
+ {label:'Dzień 1',topics:['sys','rzym'],what:'Liczby: rzędy, cyfry, zera, porównywanie (najpierw liczba cyfr!). System rzymski: zapis rząd po rzędzie, IV, IX, XL, XC, CD, CM.'},
+ {label:'Dzień 2',topics:['pam','pis'],what:'Rachunki pamięciowe z zerami, 3 i 4 razy większa, kolejność działań z nawiasami. Dodawanie i odejmowanie pisemne z przeniesieniem i pożyczką.'},
+ {label:'Dzień 3',topics:['jedn','czas'],what:'Jednostki długości, masy i pieniądze: zamiana, 2 razy większa i mniejsza, połowa i ćwierć, reszta. Zegar (ile minut upłynęło) i kalendarz (dzień tygodnia).'},
+ {label:'Dzień 3 – na koniec',topics:[],what:'Klasówka próbna z całości na czas (40 minut), jak „Przed klasówką” w podręczniku. Potem poprawa błędów.'},
+];
+function planState(){return store('m7-plan')||{}}
+
+/* ================= STAN ================= */
+const S={view:'plan',topic:'sys',test:null,train:null,lastResult:null};
+const main=document.getElementById('main');
+document.querySelectorAll('#nav button').forEach(b=>b.onclick=()=>{
+  if(S.view==='testrun'){if(b.dataset.v==='test')return;if(!confirm('Przerwać sprawdzian? Odpowiedzi nie zostaną zapisane.'))return}
+  if(S.view==='testrun'){stopClock();S.test=null}
+  go(b.dataset.v)});
+function go(v){S.view=v;const navV=(v==='testrun'||v==='result')?'test':v==='trainrun'?'train':v;
+  document.querySelectorAll('#nav button').forEach(b=>b.setAttribute('aria-current',b.dataset.v===navV));render();window.scrollTo({top:0})}
+function render(){({plan:renderPlan,learn:renderLearn,train:renderTrainSetup,trainrun:renderTrain,test:renderTestSetup,testrun:renderTest,results:renderResults,result:renderResult})[S.view]()}
+
+/* ---------- PLAN ---------- */
+function renderPlan(){
+  const ps=planState();const today=PLAN.findIndex((_,i)=>!ps[i]);const weak=weakTopics();
+  main.innerHTML=`<section class="panel">
+    <h2>3 dni do klasówki</h2>
+    <p>Codziennie dwa tematy: przeczytaj powtórkę (z przykładami z podręcznika), zrób trening dnia (10 pytań z wyjaśnieniem po każdej odpowiedzi) i sprawdzian dnia. Trzeciego dnia na koniec zrób klasówkę próbną z całości. Liczby losują się za każdym razem od nowa, a zadania są takie jak w „Przed klasówką” i zadaniach powtórkowych.</p>
+    ${weak.length?`<div class="weak"><b>Do poprawy:</b><ul>${weak.slice(0,3).map(w=>`<li>${tname(w.id)} – ${Math.round(w.a*100)}% dobrych odpowiedzi <button class="btn ghost small" data-tw="${w.id}">Poćwicz</button></li>`).join('')}</ul></div>`:''}
+  </section>
+  <section class="panel zesz"><h2>Pułapki i odpowiedzi do podręcznika</h2>
+    <p>Najczęstsze błędy na tej klasówce: porównywanie liczb o różnej liczbie cyfr, rzymskie 4, 9, 40, 90, liczenie rzędów „od XIV do XIX” (to 6, nie 5), godzina = 60 minut, reszta bez drugiego kroku.</p>
+    <div class="row"><button class="btn" id="zesz">Poćwicz pułapki (12 pytań)</button></div>
+    <details class="keyd"><summary>Odpowiedzi do zadań z podręcznika (dla rodzica)</summary>${KEY.map(([h,rows])=>`<h3>${h}</h3><div class="ztab"><table><tbody>${rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('')}</tbody></table></div>`).join('')}</details>
+  </section>
+  <div class="days">${PLAN.map((d,i)=>`<article class="day ${i===today?'today':''}">
+    <div class="dn">${d.label}${ps[i]?`<span class="done" title="ocena ze sprawdzianu próbnego">${ps[i]}</span>`:''}</div>
+    <div class="what">${d.what}</div>
+    ${d.topics.length?`<div class="tl">Powtórka: ${d.topics.map(t=>`<button class="link" data-learn="${t}">${tname(t)}</button>`).join(', ')}</div>`:''}
+    <div class="row">${d.topics.length?`<button class="btn small ghost" data-dtrain="${i}">Trening dnia</button>`:`<button class="btn small ghost" data-dfix="1">Popraw stare błędy</button>`}<button class="btn small" data-dtest="${i}">${d.topics.length?'Sprawdzian dnia':'Klasówka próbna (40 min)'}</button></div>
+  </article>`).join('')}</div>`;
+  main.querySelectorAll('[data-learn]').forEach(b=>b.onclick=()=>{S.topic=b.dataset.learn;go('learn')});
+  main.querySelectorAll('[data-dtrain]').forEach(b=>b.onclick=()=>startTrain(PLAN[+b.dataset.dtrain].topics,10,'Trening: '+PLAN[+b.dataset.dtrain].label));
+  main.querySelectorAll('[data-dtest]').forEach(b=>b.onclick=()=>{const i=+b.dataset.dtest,last=i===PLAN.length-1;startTest(i,last?40*60:0,last?'full':'day',last?null:PLAN.slice(0,i+1).flatMap(d=>d.topics))});
+  main.querySelectorAll('[data-tw]').forEach(b=>b.onclick=()=>startTrain([b.dataset.tw],10,tname(b.dataset.tw)));
+  main.querySelectorAll('[data-dfix]').forEach(b=>b.onclick=()=>startWeakTrain());
+  document.getElementById('zesz').onclick=startZeszyt;
+}
+
+/* ---------- POWTÓRKA ---------- */
+const LADDER_L=`<div class="ladder" aria-label="schodki jednostek długości"><span class="u">mm</span><span class="ar"><i>: 10 →</i><i>← · 10</i></span><span class="u">cm</span><span class="ar"><i>: 10 →</i><i>← · 10</i></span><span class="u">dm</span><span class="ar"><i>: 10 →</i><i>← · 10</i></span><span class="u">m</span><span class="ar"><i>: 1000 →</i><i>← · 1000</i></span><span class="u">km</span></div>`;
+const LADDER_M=`<div class="ladder" aria-label="schodki jednostek masy"><span class="u">g</span><span class="ar"><i>: 10 →</i><i>← · 10</i></span><span class="u">dag</span><span class="ar"><i>: 100 →</i><i>← · 100</i></span><span class="u">kg</span><span class="ar"><i>: 1000 →</i><i>← · 1000</i></span><span class="u">t</span></div>`;
+const LADDER_RULE=`<div class="rule"><div><b>→ na większą jednostkę</b> (w prawo): liczba <b>maleje</b> – <b>dzielisz</b>.</div><div><b>← na mniejszą jednostkę</b> (w lewo): liczba <b>rośnie</b> – <b>mnożysz</b>.</div></div>`;
+const NOTES={
+sys:`<h2>System dziesiątkowy i porównywanie</h2>
+<p>Każda cyfra ma swój <b>rząd</b>. Licz od prawej: jedności, dziesiątki, setki, tysiące, dziesiątki tysięcy, setki tysięcy, miliony…</p>
+<div class="ex">3 051 246: cyfra tysięcy = 1, cyfra dziesiątek = 4 → suma 5<br>20 754 389: cyfra setek tysięcy = 7, cyfra setek = 3 → suma 10</div>
+<h3><span class="hl-o">Zera</span></h3>
+<p>Tysiąc ma 3 zera, milion 6, miliard 9. Mnożenie przez 10, 100, 1000 dopisuje 1, 2, 3 zera.</p>
+<div class="ex">100 razy więcej niż milion = 100 000 000 → 8 zer</div>
+<h3><span class="hl-c">Porównywanie</span></h3>
+<div class="key"><span class="k">1.</span><span>Więcej cyfr = większa liczba: 687 543 &gt; 87 598 (6 cyfr i 5 cyfr).</span><span class="k">2.</span><span>Tyle samo cyfr – porównuj od lewej do pierwszej różnej cyfry: 48 711 &lt; 84 701 (4 &lt; 8).</span></div>
+<div class="trap"><b>Pułapka z „Przed klasówką”:</b> 687 543 &lt; 87 598 to <b>fałsz</b> – nie patrz na pierwszą cyfrę, tylko najpierw policz cyfry!</div>
+<h3><span class="hl-p">Największa i najmniejsza liczba</span></h3>
+<ul><li>Największa liczba trzycyfrowa: 999, czterocyfrowa: 9999, pięciocyfrowa: 99 999. Suma: 110 997.</li>
+<li>Najmniejsza liczba trzycyfrowa: 100, czterocyfrowa: 1000.</li>
+<li>Z cyfr 3, 0, 7, 5: największa 7530, najmniejsza 3057 (liczba nie zaczyna się od 0).</li></ul>
+<h3>Zagadki z podręcznika (s. 267)</h3>
+<ul><li><b>Iga (zad. 23):</b> cofaj kroki od końca: 6305 → 7315 → 7513.</li>
+<li><b>PIN (zad. 24):</b> 5023, 5113, 5203, 6004.</li>
+<li><b>Kleksy (zad. 26):</b> ▢42 &lt; 3▢1 – 25 par.</li>
+<li><b>Zad. 27:</b> liczb trzycyfrowych mniejszych od 200 o różnych cyfrach jest 9 · 8 = 72.</li></ul>`,
+rzym:`<h2>System rzymski</h2>
+<div class="key"><span class="k">I</span><span>1</span><span class="k">V</span><span>5</span><span class="k">X</span><span>10</span><span class="k">L</span><span>50</span><span class="k">C</span><span>100</span><span class="k">D</span><span>500</span><span class="k">M</span><span>1000</span></div>
+<h3><span class="hl-o">Zasady</span></h3>
+<ul><li>Znaki zapisujemy od największego: XXVII = 10 + 10 + 5 + 1 + 1 = 27.</li>
+<li>I, X, C, M można powtórzyć <b>najwyżej 3 razy</b> obok siebie. V, L, D – nigdy.</li>
+<li>Mniejszy znak <b>przed</b> większym – odejmujemy. Tylko te pary: <b>IV</b> = 4, <b>IX</b> = 9, <b>XL</b> = 40, <b>XC</b> = 90, <b>CD</b> = 400, <b>CM</b> = 900.</li></ul>
+<h3><span class="hl-c">Zapisywanie – rząd po rzędzie</span></h3>
+<div class="ex">49 = 40 + 9 → XL + IX = XLIX<br>573 = 500 + 70 + 3 → D + LXX + III = DLXXIII<br>2390 = 2000 + 300 + 90 → MM + CCC + XC = MMCCCXC</div>
+<div class="trap"><b>Pułapka:</b> 49 to nie IL i nie XXXXVIIII. Rozbij liczbę na tysiące, setki, dziesiątki i jedności – i każdą część zapisz osobno.</div>
+<h3>Wypróbuj</h3>
+<div class="bars" id="rw"></div>
+<h3><span class="hl-p">Odczytywanie</span></h3>
+<div class="ex">XCIX = XC + IX = 90 + 9 = 99<br>MDCCCLXXX = 1000 + 800 + 80 = 1880<br>CDXC = 400 + 90 = 490<br>CCCLIV = 300 + 50 + 4 = 354</div>
+<h3>Zadania z podręcznika</h3>
+<ul><li><b>Rzędy w kinie</b> od XIV do XIX: to rzędy 14, 15, 16, 17, 18, 19 – <b>6 rzędów</b> (19 − 14 + 1). 6 · 15 = 90 uczniów.</li>
+<li><b>Usuwanie znaku (zad. 41):</b> XCVI (96) – bez X: CVI = 106 (większa), bez C: XVI = 16 (najmniejsza). DXLII (542) – bez X: DLII = 552, bez D: XLII = 42.</li>
+<li>Długość zapisu nie mówi o wielkości: XC (90) &gt; LXXX (80).</li></ul>`,
+pam:`<h2>Rachunki pamięciowe i kolejność działań</h2>
+<h3><span class="hl-o">Dodawanie i odejmowanie „okrągłych” liczb</span></h3>
+<div class="ex">5900 + 300 = 6200 · 5900 − 300 = 5600<br>10 205 + 110 = 10 315 · 10 205 − 110 = 10 095<br>850 + 250 = 1100 · 8006 − 250 = 7756</div>
+<h3><span class="hl-c">Mnożenie i dzielenie liczb z zerami</span></h3>
+<ul><li><b>Mnożenie:</b> pomnóż bez zer i dopisz wszystkie zera: 2400 · 20 = 48 000 (24 · 2 = 48, trzy zera).</li>
+<li><b>Dzielenie:</b> skreśl tyle samo zer w obu liczbach: 36 000 : 20 = 3600 : 2 = 1800.</li>
+<li><b>3 razy większa</b> = · 3: 207 → 621, a 4 razy większa: 828.</li></ul>
+<div class="ex">6000 : 200 = 30 · 6000 · 200 = 1 200 000<br>2 400 000 : 2000 = 1200 · 106 000 : 200 = 530</div>
+<h3><span class="hl-p">Kolejność działań</span></h3>
+<div class="key"><span class="k">1.</span><span>nawiasy</span><span class="k">2.</span><span>mnożenie i dzielenie (od lewej)</span><span class="k">3.</span><span>dodawanie i odejmowanie (od lewej)</span></div>
+<div class="ex">1300 + 4 · (5700 − 3500) + 700 · 100<br>= 1300 + 4 · 2200 + 70 000 = 1300 + 8800 + 70 000 = 80 100</div>
+<div class="ex">360 000 : 90 − (8000 − 6 · 800)<br>= 4000 − (8000 − 4800) = 4000 − 3200 = 800</div>
+<div class="ex">60 · 90 + 3 · (3000 : 60 + 2500 : 10)<br>= 5400 + 3 · (50 + 250) = 5400 + 900 = 6300</div>
+<div class="trap"><b>Uwaga:</b> w nawiasie też obowiązuje kolejność – najpierw 6 · 800, dopiero potem odejmowanie.</div>`,
+pis:`<h2>Dodawanie i odejmowanie pisemne</h2>
+<h3><span class="hl-o">Dodawanie</span></h3>
+<ul><li>Podpisz liczby <b>od prawej</b>: jedności pod jednościami, dziesiątki pod dziesiątkami.</li>
+<li>Licz od prawej. Gdy suma w kolumnie to 10 lub więcej, zapisz cyfrę jedności, a 1 (albo 2) przenieś do następnej kolumny.</li></ul>
+<div class="ex"><span class="colw"><span>  3789
++24973</span><span class="cr"> 28762</span></span></div>
+<h3><span class="hl-c">Odejmowanie</span></h3>
+<ul><li>Gdy górna cyfra jest za mała, pożycz 1 z kolumny obok: górna cyfra rośnie o 10, sąsiednia maleje o 1.</li>
+<li>Zero w odjemnej: pożyczka „przechodzi” dalej, a 0 zmienia się w 9.</li>
+<li><b>Sprawdzenie:</b> wynik + odjemnik = odjemna.</li></ul>
+<div class="ex"><span class="colw"><span> 4025
+−1987</span><span class="cr"> 2038</span></span></div>
+<p>Sprawdzenie: 2038 + 1987 = 4025 ✓</p>
+<h3>Wypróbuj – policz w zeszycie i sprawdź</h3>
+<div class="bars" id="cw"></div>
+<h3><span class="hl-p">Zadania z podręcznika</span></h3>
+<ul><li><b>Zad. 43:</b> 345 + 346 + 347 + 348 = 1386.</li>
+<li><b>Zad. 44:</b> 999 + 9999 + 99 999 = 110 997.</li>
+<li><b>Zad. 46:</b> z cyfr liczby układasz największą i najmniejszą, odejmujesz i powtarzasz z wynikiem. Zawsze wychodzi 6174!</li></ul>`,
+jedn:`<h2>Jednostki: długość, masa, pieniądze</h2>
+<div class="key"><span class="k">1 cm</span><span>= 10 mm</span><span class="k">1 dm</span><span>= 10 cm</span><span class="k">1 m</span><span>= 10 dm = 100 cm</span><span class="k">1 km</span><span>= 1000 m</span><span class="k">1 dag</span><span>= 10 g</span><span class="k">1 kg</span><span>= 100 dag = 1000 g</span><span class="k">1 t</span><span>= 1000 kg</span><span class="k">1 zł</span><span>= 100 gr</span></div>
+<p>Na <b>mniejszą</b> jednostkę – <b>mnożysz</b>. Na <b>większą</b> – <b>dzielisz</b>.</p>
+<div class="ex">9 m = 90 dm = 900 cm · 200 dm = 20 m · 2 m 1 cm = 2010 mm<br>9 kg = 900 dag = 9000 g · 2200 dag = 22 kg · 300 000 g = 300 kg</div>
+<h3><span class="hl-o">2 razy większa i 2 razy mniejsza</span></h3>
+<p>Zamień na mniejszą jednostkę, policz, zamień z powrotem.</p>
+<div class="ex">11 m 70 cm = 1170 cm → · 2 = 2340 cm = 23 m 40 cm; : 2 = 585 cm = 5 m 85 cm<br>1 t 120 kg = 1120 kg → · 2 = 2 t 240 kg; : 2 = 560 kg</div>
+<h3><span class="hl-c">Połowa i czwarta część</span></h3>
+<div class="ex">15 km 600 m = 15 600 m → połowa 7 km 800 m, czwarta część 3 km 900 m<br>6 cm 8 mm = 68 mm → połowa 3 cm 4 mm, czwarta część 1 cm 7 mm</div>
+<h3><span class="hl-p">Z „Przed klasówką”</span></h3>
+<ul><li>13 500 gr = 135 zł, więc mniejsza jest 13 zł 60 gr. 1400 gr = 14 zł, więc większa jest 135 zł 75 gr.</li>
+<li>10 razy dłuższy od 2 cm 4 mm: 24 mm · 10 = 240 mm = <b>24 cm</b>.</li>
+<li>Ciasto: 30 dag + 50 g + 200 g + 1 kg = 300 + 50 + 200 + 1000 = 1550 g = <b>155 dag</b>.</li>
+<li>Reszta – zawsze dwa kroki: policz zakupy, potem odejmij od banknotu.</li></ul>`,
+czas:`<h2>Zegar i kalendarz</h2>
+<div class="key"><span class="k">1 h</span><span>= 60 min</span><span class="k">1 tydzień</span><span>= 7 dni</span></div>
+<h3><span class="hl-o">Ile czasu upłynęło?</span></h3>
+<p>Licz „skokami” do pełnej godziny.</p>
+<div class="ex">18:45 → 19:00 = 15 min, 19:00 → 19:37 = 37 min<br>razem 15 + 37 = 52 min</div>
+<h3><span class="hl-c">O której się skończy?</span></h3>
+<p>Zamień minuty na godziny i minuty, potem dodaj.</p>
+<div class="ex">Film od 16:00, trwa 105 min = 1 h 45 min → koniec 17:45<br>Spóźnienie 110 min = 1 h 50 min</div>
+<div class="trap"><b>Pułapka:</b> 1 h to 60 minut, nie 100! 16:50 + 20 min to 17:10, a nie 16:70.</div>
+<h3><span class="hl-p">Dzień tygodnia</span></h3>
+<p>Co 7 dni wypada ten sam dzień tygodnia. Policz różnicę dni, odejmij pełne tygodnie i przesuń się o resztę.</p>
+<div class="ex">1 grudnia – piątek. Do 25 grudnia: 24 dni = 3 · 7 + 3<br>piątek + 3 dni → sobota, niedziela, <b>poniedziałek</b></div>
+<p>Skrót: 1, 8, 15, 22, 29 grudnia to piątki. 25 grudnia jest 3 dni po 22 → poniedziałek.</p>`,
+};
+function renderLearn(){
+  const t=TOPICS.find(x=>x.id===S.topic);
+  main.innerHTML=`<div class="learn"><div class="toc">${TOPICS.map(x=>`<button data-id="${x.id}" aria-current="${x.id===S.topic}">${x.name}</button>`).join('')}</div>
+  <article class="sheet"><p class="src">${t.src}</p>${NOTES[t.id]}
+  <div class="row" style="margin-top:20px"><button class="btn" id="tthis">Poćwicz ten temat</button>${TOPICS.indexOf(t)<TOPICS.length-1?'<button class="btn ghost" id="tnext">Następny temat</button>':''}</div></article></div>`;
+  main.querySelectorAll('.toc button').forEach(b=>b.onclick=()=>{S.topic=b.dataset.id;renderLearn()});
+  document.getElementById('tthis').onclick=()=>startTrain([t.id],10,t.name);
+  const nx=document.getElementById('tnext');if(nx)nx.onclick=()=>{S.topic=TOPICS[TOPICS.indexOf(t)+1].id;renderLearn();window.scrollTo({top:0})};
+  romanWidget();columnWidget();
+}
+function romanWidget(){
+  const host=document.getElementById('rw');if(!host)return;
+  host.innerHTML=`<div class="ctl"><label>liczba <input class="blank" style="width:6em" inputmode="numeric" autocomplete="off" value="2390" aria-label="liczba od 1 do 3999"></label></div><div class="rwout"></div>`;
+  const inp=host.querySelector('input'),out=host.querySelector('.rwout');
+  const draw=()=>{const v=inp.value.replace(/\D/g,'').slice(0,4);if(inp.value!==v)inp.value=v;const n=+v;
+    out.innerHTML=n>=1&&n<=3999?`<p class="steps">${romWhy(n)}</p>`:'<p class="muted">Wpisz liczbę od 1 do 3999.</p>'};
+  inp.oninput=draw;draw();
+}
+function columnWidget(){
+  const host=document.getElementById('cw');if(!host)return;
+  host.innerHTML=`<div class="ctl"><input class="blank" style="width:7em" inputmode="numeric" value="5073" aria-label="pierwsza liczba">
+    <select aria-label="działanie"><option>−</option><option>+</option></select>
+    <input class="blank" style="width:7em" inputmode="numeric" value="4381" aria-label="druga liczba">
+    <button class="btn small ghost" type="button">Pokaż wynik</button></div><div class="cwout"><p class="muted">Najpierw policz w zeszycie, potem kliknij.</p></div>`;
+  const [a,b]=host.querySelectorAll('input'),op=host.querySelector('select'),out=host.querySelector('.cwout');
+  [a,b].forEach(i=>i.oninput=()=>{i.value=i.value.replace(/\D/g,'').slice(0,7);out.innerHTML='<p class="muted">Najpierw policz w zeszycie, potem kliknij.</p>'});
+  op.onchange=a.oninput;
+  host.querySelector('button').onclick=()=>{const x=+a.value||0,y=+b.value||0;
+    if(op.value==='−'&&y>x){out.innerHTML='<p class="muted">Od mniejszej liczby nie odejmiemy większej – zamień liczby miejscami.</p>';return}
+    const r=op.value==='+'?x+y:x-y;out.innerHTML=column([x,y],op.value,r)+(op.value==='−'?`<p class="muted">Sprawdzenie: ${fmt(r)} + ${fmt(y)} = ${fmt(x)}</p>`:'')};
+}
+/* ---------- ODPOWIEDZI DO PODRĘCZNIKA ---------- */
+const KEY=[
+ ['Przed klasówką',[
+  ['1','P, P, F, F (687 543 ma więcej cyfr niż 87 598; 48 711 < 84 701)'],
+  ['2','mniejsza: B (13 500 gr = 135 zł); większa: C (1400 gr = 14 zł)'],['3','C – 24 cm'],['4','D – 155 dag (1550 g)'],
+  ['5','a) 1 + 4 = 5; b) 7 + 3 = 10'],['6','8 zer (100 000 000)'],['7','100 zł − (5 zł 80 gr + 2 bułki) – policz cenę bułek ze swojej książki'],
+  ['8','poniedziałek'],['9','6 rzędów · 15 = 90 uczniów'],['10','a) LVIII, XLIX, DLXXIII, MMCCCXC; b) 99, 1880, 490, 354'],
+  ['11','a) 52 min; b) 17:45'],['12','godzina planowa + 1 h 50 min']]],
+ ['s. 267 (zad. 23–35)',[
+  ['23','7513'],['24','5023, 5113, 5203, 6004'],['26','25 par (pierwsza cyfra 1 lub 2 – dowolna druga; 3 – druga od 5 do 9)'],['27','72'],
+  ['28a','6200/5600, 2052/1452, 8350/7750, 20 840/20 240'],['28b','1050/830, 767/547, 1650/1430, 10 315/10 095'],['28c','1100/600, 1650/1150, 8256/7756, 5710/5210'],
+  ['29','390 i 520; 621 i 828; 1530 i 2040; 3600 i 4800'],
+  ['30a',':2, ·2, :20, ·20 → 1 400 000: 700 000, 2 800 000, 70 000, 28 000 000 · 36 000: 18 000, 72 000, 1800, 720 000 · 2400: 1200, 4800, 120, 48 000 · 1600: 800, 3200, 80, 32 000 · 160 000: 80 000, 320 000, 8000, 3 200 000'],
+  ['30b',':200, ·200, :2000, ·2000 → 6000: 30, 1 200 000, 3, 12 000 000 · 12 000: 60, 2 400 000, 6, 24 000 000 · 2 400 000: 12 000, 480 000 000, 1200, 4 800 000 000 · 28 000: 140, 5 600 000, 14, 56 000 000 · 106 000: 530, 21 200 000, 53, 212 000 000'],
+  ['31','a) 80 100; b) 800; c) 6300'],['32','9 m = 90 dm = 900 cm; 70 km = 70 000 m; 85 cm = 850 mm; 200 dm = 20 m = 2000 cm'],
+  ['33','a) 62 cm, 30 cm, 814 cm; b) 12 300 m, 80 000 m, 200 m; c) 178 mm, 400 mm, 2010 mm'],
+  ['34','a) 23 m 40 cm i 5 m 85 cm; b) 19 cm 2 mm i 4 cm 8 mm; c) 7 km 600 m i 1 km 900 m; d) 2 m 14 cm i 53 cm 5 mm'],
+  ['35','a) 1 m 85 cm i 92 cm 5 mm; b) 7 km 800 m i 3 km 900 m; c) 3 cm 4 mm i 1 cm 7 mm']]],
+ ['zad. 36–46',[
+  ['36','9 kg = 900 dag = 9000 g; 80 t = 80 000 kg; 65 dag = 650 g; 300 dag = 3 kg = 3000 g; 7000 g = 7 kg = 700 dag'],
+  ['37','a) 325 dag, 75 dag, 350 dag; b) 206 g, 3700 g, 8030 g; c) 10 130 kg, 22 kg, 300 kg'],
+  ['38','a) 7 kg 40 dag i 1 kg 85 dag; b) 2 t 240 kg i 560 kg; c) 21 dag 2 g i 5 dag 3 g; d) 5 kg 80 g i 1 kg 270 g'],
+  ['39','a) XXXVIII, XLII, LIII, LXIX, LXXXVI; b) XCVII, CCXIX, CDXXXII, DCXL, CMXXVI'],
+  ['41','a) XCVI: usuń X → CVI = 106 (większa), usuń C → XVI = 16 (najmniejsza); b) DXLII: usuń X → DLII = 552, usuń D → XLII = 42'],
+  ['42','a) 904 b) 1032 c) 8011 d) 8238 e) 28 762 f) 90 367 g) 2481 h) 6844'],['43','1386'],['44','110 997'],
+  ['45','a) 87 b) 2876 c) 4231 d) 7109 e) 692 f) 4289 g) 2038 h) 289'],['46','zawsze wychodzi 6174']]],
+];
+const ZTYPES=[['sys','tf'],['sys','zeros'],['rzym','toR'],['rzym','fromR'],['rzym','rows'],['pam','order'],['pis','sub0'],['jedn','money'],['jedn','cake'],['jedn','dbl'],['czas','elapsed'],['czas','weekday'],['czas','endTime']];
+function startZeszyt(){const q=shuffle(ZTYPES).slice(0,12).map(g=>make(...g));S.train={q,i:0,ok:0,title:'Pułapki z „Przed klasówką”',n0:q.length};prepTrain();go('trainrun')}
+/* ---------- RENDEROWANIE POZYCJI ---------- */
+function itemHTML(it,key,state){
+  // state: undefined (edycja) | {user, res}
+  const pre=it.pre?`<div class="pre">${it.pre}</div>`:'';
+  if(it.t==='choice'){
+    return `<div class="tx">${pre}${it.q}<div class="copts">${it.opts.map((o,i)=>{
+      let c='';if(state){if(o.ok)c='ok';else if(state.user===i)c='no'}else if(it.user===i)c='sel';
+      return `<button class="copt ${c}" data-k="${key}" data-o="${i}" ${state?'disabled':''}><span class="box">${state?(o.ok?'✓':(state.user===i?'✗':'')):(it.user===i?'●':'')}</span>${esc(o.x)}</button>`}).join('')}</div></div>`;
+  }
+  const big=it.ans.some(a=>typeof a==='number'&&a>=10000);
+  let h='',i=0;
+  it.q.split(/(\[\]|\[\?\])/).forEach(p=>{
+    if(p==='[]'){const a=it.ans[i],v=state?(state.user[i]??''):((it.user&&it.user[i])||''),c=state?(state.res[i]?'ok':'no'):'';
+      h+=`<input class="blank ${c}" style="width:${big?'9.5em':'4.4em'}" data-k="${key}" data-i="${i}" inputmode="numeric" autocomplete="off" value="${esc(v)}" ${state?'disabled':''} aria-label="okienko ${i+1}">`;
+      if(state&&!state.res[i])h+=`<small class="corr"> → ${esc(fmt(a))}</small>`;i++}
+    else if(p==='[?]'){const a=it.ans[i],u=state?state.user[i]:(it.user&&it.user[i]);
+      h+=`<span class="sgn" role="group" aria-label="wybierz znak">${['<','>'].map(s=>{let c='';if(state){if(s===a)c='ok';else if(u===s)c='no'}else if(u===s)c='sel';
+        return `<button type="button" class="sg ${c}" data-k="${key}" data-i="${i}" data-s="${s}" aria-pressed="${u===s}" ${state?'disabled':''}>${sgH(s)}</button>`}).join('')}</span>`;i++}
+    else h+=p});
+  return `<div class="tx">${pre}${h}</div>`;
+}
+const clean=v=>String(v??'').replace(/\s/g,'');
+function checkItem(it,user){
+  if(it.t==='choice'){const ok=user!=null&&it.opts[user].ok;return {res:[ok],p:ok?1:0,user}}
+  const res=it.ans.map((a,i)=>{if(typeof a==='string')return user[i]===a;const s=clean(user[i]);return s!==''&&/^\d+$/.test(s)&&parseInt(s,10)===a});
+  return {res,p:res.filter(Boolean).length,user};
+}
+
+/* ---------- SPRAWDZIAN ---------- */
+function renderTestSetup(){
+  const sc=getScale();
+  main.innerHTML=`<section class="panel"><h2>Klasówka próbna</h2>
+  <p>Zadania z całego materiału przed klasówką. W trakcie nie ma podpowiedzi, a po sprawdzeniu zobaczysz każde rozwiązanie krok po kroku.</p>
+  <p class="muted">Długość</p>
+  <div class="row" id="mchoice"><button class="btn small" data-m="short">Krótka (ok. 20 pkt)</button><button class="btn ghost small" data-m="full">Pełna (ok. 40 pkt)</button></div>
+  <p class="muted">Czas</p>
+  <div class="row" id="tchoice">${[[0,'Bez limitu'],[40*60,'40 min'],[45*60,'45 min (jak lekcja)']].map(([s,l],i)=>`<button class="btn ${i?'ghost':''} small" data-s="${s}">${l}</button>`).join('')}</div>
+  <div class="row" style="margin-top:16px"><button class="btn" id="go">Rozpocznij</button></div>
+  <details><summary>Skala ocen (domyślnie jak w poprzedniej kartkówce – zmień, jeśli nauczyciel ma inną)</summary>
+  <table class="scale"><tbody>${[6,5,4,3,2].map(g=>`<tr><td><b>${g}</b></td><td>${GRADES[g]}</td><td>od <input type="number" min="0" max="100" data-g="${g}" value="${sc[g]}"> %</td></tr>`).join('')}
+  <tr><td><b>1</b></td><td>niedostateczny</td><td>poniżej ${sc[2]} %</td></tr></tbody></table>
+  <button class="btn ghost small" id="rs" style="margin-top:8px">Przywróć domyślną skalę</button></details></section>`;
+  let secs=0,mode='short';
+  main.querySelectorAll('#mchoice button').forEach(b=>b.onclick=()=>{mode=b.dataset.m;main.querySelectorAll('#mchoice button').forEach(x=>x.classList.toggle('ghost',x!==b))});
+  main.querySelectorAll('#tchoice button').forEach(b=>b.onclick=()=>{secs=+b.dataset.s;main.querySelectorAll('#tchoice button').forEach(x=>x.classList.toggle('ghost',x!==b))});
+  document.getElementById('go').onclick=()=>startTest(null,secs,mode,null);
+  main.querySelectorAll('.scale input').forEach(inp=>inp.onchange=()=>{const s=getScale();s[inp.dataset.g]=Math.max(0,Math.min(100,+inp.value||0));store('m7-scale',s);renderTestSetup();main.querySelector('details').open=true});
+  document.getElementById('rs').onclick=()=>{store('m7-scale',{...DEF_SCALE});renderTestSetup();main.querySelector('details').open=true};
+}
+let clockId=null;
+function stopClock(){if(clockId){clearInterval(clockId);clockId=null}}
+function startTest(day,secs,mode,topics){
+  const tasks=mode==='day'?[...buildTest('full',PLAN[day].topics),...buildTest('short',topics.filter(t=>!PLAN[day].topics.includes(t)))]:buildTest(mode||'short',topics||null);tasks.forEach(t=>t.items.forEach(it=>it.user=it.t==='choice'?null:[]));
+  S.test={tasks,day,secs,start:Date.now()};go('testrun');
+  stopClock();clockId=setInterval(tick,1000);tick();
+}
+function tick(){const T=S.test;if(!T)return;const el=document.getElementById('clock');const e=(Date.now()-T.start)/1000;
+  if(T.secs){const left=Math.max(0,T.secs-e);if(el){el.textContent=mmss(left);el.classList.toggle('warn',left<=300)}if(left<=0){finishTest(true)}}
+  else if(el)el.textContent=mmss(e)}
+const mmss=s=>{s=Math.round(s);return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')};
+function countAnswered(){let a=0,n=0;S.test.tasks.forEach(t=>t.items.forEach(it=>{if(it.t==='choice'){n++;if(it.user!=null)a++}else it.ans.forEach((_,i)=>{n++;if(clean(it.user[i])!=='')a++})}));return [a,n]}
+function renderTest(){
+  const T=S.test;const total=T.tasks.reduce((s,t)=>s+t.items.reduce((x,it)=>x+maxPts(it),0),0);
+  main.innerHTML=`<div class="topbar"><span class="clock" id="clock">00:00</span><span id="prog"></span><button class="btn small" id="fin">Sprawdź</button></div>
+  ${T.tasks.map((t,ti)=>{const mp=t.items.reduce((x,it)=>x+maxPts(it),0);const L=Math.max(...t.items.map(it=>it.q.length));const wide=t.items.some(it=>it.wide||it.t==='choice')||L>70?'wide':L>26?'two':'';
+    return `<section class="task"><div class="thead"><span class="tnum">${ti+1}</span><span class="tins">${t.ins}</span><span class="tpts">${mp} pkt</span></div>
+    <div class="items ${wide}">${t.items.map((it,ii)=>`<div class="it">${t.items.length>1?`<span class="lt">${'abcdef'[ii]})</span>`:''}${itemHTML(it,ti+'-'+ii)}</div>`).join('')}</div></section>`}).join('')}
+  <div class="row" style="justify-content:flex-end"><button class="btn" id="fin2">Sprawdź sprawdzian</button></div>`;
+  const prog=()=>{const [a,n]=countAnswered();document.getElementById('prog').textContent=`${a} / ${n} okienek`};prog();tick();
+  const itemOf=k=>{const [a,b]=k.split('-').map(Number);return T.tasks[a].items[b]};
+  main.querySelectorAll('input.blank').forEach(inp=>inp.oninput=()=>{inp.value=inp.value.replace(/[^\d\s]/g,'').slice(0,16);itemOf(inp.dataset.k).user[+inp.dataset.i]=inp.value;prog()});
+  main.querySelectorAll('.copt').forEach(b=>b.onclick=()=>{const it=itemOf(b.dataset.k);it.user=+b.dataset.o;
+    b.parentElement.querySelectorAll('.copt').forEach((x,i)=>{x.classList.toggle('sel',i===it.user);x.querySelector('.box').textContent=i===it.user?'●':''});prog()});
+  main.querySelectorAll('.sg').forEach(b=>b.onclick=()=>{const it=itemOf(b.dataset.k);it.user[+b.dataset.i]=b.dataset.s;b.parentElement.querySelectorAll('.sg').forEach(x=>{x.classList.toggle('sel',x===b);x.setAttribute('aria-pressed',x===b)});prog()});
+  const fin=()=>{const [a,n]=countAnswered();if(a<n&&!confirm(`Puste okienka: ${n-a}. Na pewno sprawdzić?`))return;finishTest(false)};
+  document.getElementById('fin').onclick=fin;document.getElementById('fin2').onclick=fin;
+}
+function finishTest(timeout){
+  stopClock();const T=S.test;if(!T)return;let p=0,mx=0;const per=[];const wrong=[];
+  T.tasks.forEach((t,ti)=>{let tp=0,tm=0;t.items.forEach(it=>{const c=checkItem(it,it.user);it.check=c;tp+=c.p;tm+=maxPts(it);addStat(it.topic,c.p===maxPts(it));if(c.p<maxPts(it))wrong.push(it)});p+=tp;mx+=tm;per.push([tp,tm])});
+  const pct=p/mx*100,g=gradeFor(pct),ms=Date.now()-T.start;
+  const rec={d:Date.now(),p,mx,pct,g,ms,day:T.day,timeout,mist:wrong.map(it=>({topic:it.topic,q:it.q.replace(/<br>/g,' · ').replace(/<[^>]+>/g,'').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/\[\?\]/g,'…'),ans:it.t==='choice'?it.opts.find(o=>o.ok).x:it.ans.join(', '),user:it.t==='choice'?(it.user!=null?it.opts[it.user].x:'—'):it.user.map(x=>clean(x)||'—').join(', ')}))};
+  const h=store('m7-history')||[];h.unshift(rec);store('m7-history',h.slice(0,40));
+  if(T.day!=null){const ps=planState();ps[T.day]=g;store('m7-plan',ps)}
+  S.lastResult={T,p,mx,pct,g,ms,per,wrong,timeout};S.test=null;go('result');
+}
+function renderResult(){
+  const {T,p,mx,pct,g,ms,per,wrong,timeout}=S.lastResult;
+  main.innerHTML=`<section class="panel"><div class="result-top">
+    <div class="grade" aria-label="Ocena ${g}"><svg viewBox="0 0 150 150" aria-hidden="true"><path d="M78 14 C 30 10, 10 50, 16 88 C 22 128, 70 142, 108 128 C 142 114, 146 62, 124 34 C 108 14, 80 8, 56 18"/></svg><div class="digit">${g}</div></div>
+    <div><p class="gname">${GRADES[g]}</p><p style="margin:6px 0 0;font-size:1.1rem"><b>${pts(p)}</b> z ${mx} pkt, czyli ${Math.round(pct)}%</p>
+    <p class="muted" style="margin:4px 0 0">${MSG[g]} Czas: ${mmss(ms/1000)}${timeout?' (czas minął)':''}.</p></div></div>
+    <div class="chips">${per.map(([a,b],i)=>`<span class="chip ${a<b?'bad':''}">Zad. ${i+1}: ${a}/${b}</span>`).join('')}</div>
+    <div class="row" style="margin-top:16px">${wrong.length?`<button class="btn" id="fix">Popraw błędy (${wrong.length})</button>`:''}<button class="btn ghost" id="again">Nowy sprawdzian</button><button class="btn ghost" id="toplan">Plan</button></div>
+  </section>
+  <h2 style="font-family:var(--hand);font-size:2rem;color:var(--ink);margin:6px 0 10px">Rozwiązania</h2>
+  ${T.tasks.map((t,ti)=>`<section class="task"><div class="thead"><span class="tnum">${ti+1}</span><span class="tins">${t.ins}</span><span class="tpts">${per[ti][0]}/${per[ti][1]} pkt</span></div>
+    ${t.items.map((it,ii)=>{const full=it.check.p===maxPts(it);return `<div class="it" style="flex-wrap:wrap">${t.items.length>1?`<span class="lt">${'abcdef'[ii]})</span>`:''}${itemHTML(it,'r',it.check)}
+      ${full?'':`<div style="flex-basis:100%;padding-left:1.4em"><div class="steps">${it.why}</div></div>`}</div>`}).join('')}</section>`).join('')}`;
+  const fx=document.getElementById('fix');if(fx)fx.onclick=()=>startFix(wrong);
+  document.getElementById('again').onclick=()=>go('test');
+  document.getElementById('toplan').onclick=()=>go('plan');
+}
+
+/* ---------- TRENING ---------- */
+function renderTrainSetup(){
+  const st=stats();
+  main.innerHTML=`<section class="panel"><h2>Trening</h2><p>10 pytań, po każdej odpowiedzi od razu widzisz, czy dobrze, i jak to policzyć. Błędne pytanie wraca jeszcze raz z innymi liczbami.</p>
+  <div class="row"><button class="btn" id="tw">Moje słabe punkty</button><button class="btn ghost" id="tall">Wszystko po trochu</button></div></section>
+  <div class="tlist">${TOPICS.map(t=>{const s=st[t.id];const a=s&&s.n?s.ok/s.n:null;
+    return `<button class="tbtn" data-t="${t.id}"><b>${t.name}</b><br><small>${a==null?'jeszcze nie ćwiczone':`${Math.round(a*100)}% dobrze (${s.n} odp.)`}</small><div class="acc"><i style="width:${a==null?0:a*100}%"></i></div></button>`}).join('')}</div>`;
+  main.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>startTrain([b.dataset.t],10,tname(b.dataset.t)));
+  document.getElementById('tw').onclick=()=>startWeakTrain();
+  document.getElementById('tall').onclick=()=>startTrain(TOPICS.map(t=>t.id),10,'Wszystko po trochu');
+}
+function startWeakTrain(){
+  const w=TOPICS.map(t=>{const a=acc(t.id);return {id:t.id,w:a==null?1.5:1+5*(1-a)}});
+  const tot=w.reduce((s,x)=>s+x.w,0);const q=[];
+  for(let i=0;i<10;i++){let r=Math.random()*tot;const t=w.find(x=>(r-=x.w)<=0)||w[0];q.push(anyFrom(t.id))}
+  S.train={q,i:0,ok:0,title:'Moje słabe punkty',n0:q.length};prepTrain();go('trainrun');
+}
+function startTrain(topics,n,title){
+  const q=[];for(let i=0;i<n;i++)q.push(anyFrom(topics[i%topics.length]));
+  S.train={q:shuffle(q),i:0,ok:0,title,n0:q.length};prepTrain();go('trainrun');
+}
+function startFix(wrong){
+  const q=[];wrong.forEach(it=>{const c={...it};delete c.check;q.push(c)});wrong.forEach(it=>q.push(make(...it.gen)));
+  S.train={q,i:0,ok:0,title:'Poprawa błędów',n0:q.length};prepTrain();go('trainrun');
+}
+function prepTrain(){S.train.q.forEach(it=>{it.user=it.t==='choice'?null:[];it.check=null})}
+function renderTrain(){
+  const Z=S.train;
+  if(Z.i>=Z.q.length){
+    const pct=Math.round(Z.ok/Z.n0*100);
+    main.innerHTML=`<section class="panel"><h2>${Z.title}: koniec</h2><p style="font-size:1.15rem">Dobrze za pierwszym razem: <b>${Z.ok} z ${Z.n0}</b> (${pct}%).</p>
+    <p class="muted">${pct>=90?'Super! Ten temat masz opanowany.':pct>=70?'Dobrze. Jutro powtórz ten temat jeszcze raz.':'Przeczytaj powtórkę tego tematu i spróbuj ponownie.'}</p>
+    <div class="row"><button class="btn" id="more">Jeszcze 10 pytań</button><button class="btn ghost" id="back">Wróć</button></div></section>`;
+    document.getElementById('more').onclick=()=>{const topics=[...new Set(Z.q.map(x=>x.topic))];startTrain(topics,10,Z.title)};
+    document.getElementById('back').onclick=()=>go('plan');return;
+  }
+  const it=Z.q[Z.i],chk=it.check;
+  const hasAns=it.t==='choice'?it.user!=null:it.ans.every((_,i)=>clean(it.user[i])!=='');
+  let fb='';if(chk){const full=chk.p===maxPts(it);const cls=full?'ok':chk.p>0?'half':'no';
+    fb=`<div class="fb ${cls}" role="status"><b>${full?'✓ Dobrze!':chk.p>0?'Częściowo dobrze':'✗ Jeszcze nie'}</b>${full?'':'Tak to policzysz:'}<div class="steps">${it.why}</div></div>`}
+  main.innerHTML=`<section class="panel">
+    <div class="progress"><i style="width:${(Z.i+(chk?1:0))/Z.q.length*100}%"></i></div>
+    <div class="row" style="justify-content:space-between;color:var(--muted);font-size:.9rem"><span>${Z.title}: pytanie ${Z.i+1} z ${Z.q.length}</span><span>${tname(it.topic)}</span></div>
+    <div class="qtext">${itemHTML(it,'t',chk||undefined)}</div>${fb}
+    <div class="row" style="justify-content:flex-end;margin-top:14px"><button class="btn ghost" id="lrn">Powtórka tematu</button><button class="btn" id="nx" ${chk||hasAns?'':'disabled'}>${chk?(Z.i===Z.q.length-1?'Zakończ':'Dalej'):'Sprawdź'}</button></div></section>`;
+  const nx=document.getElementById('nx');
+  main.querySelectorAll('input.blank').forEach((inp,idx)=>{inp.oninput=()=>{inp.value=inp.value.replace(/[^\d\s]/g,'').slice(0,16);it.user[+inp.dataset.i]=inp.value;nx.disabled=!it.ans.every((_,i)=>clean(it.user[i])!=='')};
+    inp.onkeydown=e=>{if(e.key==='Enter'&&!nx.disabled)nx.click()}; if(idx===0&&!chk)inp.focus()});
+  main.querySelectorAll('.copt').forEach(b=>b.onclick=()=>{it.user=+b.dataset.o;renderTrain()});
+  main.querySelectorAll('.sg').forEach(b=>b.onclick=()=>{it.user[+b.dataset.i]=b.dataset.s;renderTrain()});
+  nx.onclick=()=>{if(!chk){const c=checkItem(it,it.user);it.check=c;const full=c.p===maxPts(it);addStat(it.topic,full);
+      if(full&&!it.retry)Z.ok++;
+      if(!full&&!it.retry){const nv=make(...it.gen);nv.retry=true;nv.user=nv.t==='choice'?null:[];Z.q.splice(Math.min(Z.q.length,Z.i+4),0,nv)}
+      renderTrain();document.getElementById('nx').focus()}
+    else{Z.i++;renderTrain();window.scrollTo({top:0})}};
+  document.getElementById('lrn').onclick=()=>{S.topic=it.topic;go('learn')};
+}
+
+/* ---------- WYNIKI ---------- */
+function renderResults(){
+  const h=store('m7-history')||[];const st=stats();
+  main.innerHTML=`<section class="panel"><h2>Wyniki sprawdzianów</h2>
+  ${h.length?`<div style="overflow-x:auto"><table class="hist"><thead><tr><th>Data</th><th>Ocena</th><th>Punkty</th><th>Czas</th><th>Błędy</th></tr></thead><tbody>
+  ${h.map(r=>`<tr><td>${new Date(r.d).toLocaleDateString('pl-PL',{day:'numeric',month:'short'})}${r.day!=null?`<br><small class="muted">dzień ${r.day+1}</small>`:''}</td><td class="g">${r.g}</td><td>${pts(r.p)}/${r.mx}<br><small class="muted">${Math.round(r.pct)}%</small></td><td>${mmss(r.ms/1000)}</td>
+    <td>${r.mist.length?`<details><summary>${r.mist.length}</summary><ul style="padding-left:1.1em;margin:6px 0">${r.mist.map(m=>`<li><small>${esc(m.q)}<br>podano: <b>${esc(m.user)}</b>, poprawnie: <b>${esc(m.ans)}</b></small></li>`).join('')}</ul></details>`:'0'}</td></tr>`).join('')}</tbody></table></div>`
+  :'<p>Nie ma jeszcze wyników. Zrób pierwszy sprawdzian dnia z planu albo klasówkę próbną w zakładce Klasówka.</p>'}
+  </section>
+  <section class="panel"><h2>Tematy</h2><div class="tlist">${TOPICS.map(t=>{const s=st[t.id];const a=s&&s.n?s.ok/s.n:null;
+    return `<div class="tbtn" style="cursor:default"><b>${t.name}</b><br><small>${a==null?'brak odpowiedzi':`${Math.round(a*100)}% dobrze (${s.n} odp.)`}</small><div class="acc"><i style="width:${a==null?0:a*100}%"></i></div></div>`}).join('')}</div>
+  <details><summary>Wyczyść dane (wyniki, statystyki i plan)</summary><p class="muted">Usunie wszystko zapisane na tym urządzeniu.</p><button class="btn ghost small" id="clr">Wyczyść</button></details></section>`;
+  const c=document.getElementById('clr');if(c)c.onclick=()=>{if(confirm('Usunąć wszystkie wyniki?')){['m7-history','m7-stats','m7-plan'].forEach(k=>{try{localStorage.removeItem(k)}catch(e){}});renderResults()}};
+}
+
+go('plan');
+</script>
+</body>
+</html>
